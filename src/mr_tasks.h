@@ -1,96 +1,92 @@
 #pragma once
 
-#include <fstream>
-#include <functional>
-#include <iostream>
 #include <string>
-#include <mutex>
-#include <unordered_map>
-#include <unordered_set>
+#include <iostream>
 #include <vector>
-
+#include <fstream>
 /* CS6210_TASK Implement this data structureas per your implementation.
-    You will need this when your worker is running the map task*/
-
+		You will need this when your worker is running the map task*/
 struct BaseMapperInternal {
-  /* DON'T change this function's signature */
-  BaseMapperInternal();
 
-  /* DON'T change this function's signature */
-  void emit(const std::string& key, const std::string& val);
-  std::string hash2key(const std::string& key);
+		/* DON'T change this function's signature */
+		BaseMapperInternal();
 
-  /* NOW you can add below, data members and member functions as per the need of
-   * your implementation*/
-  std::mutex mutex_;
-  std::string output_dir_;
-  std::unordered_set<std::string> temp_files_;
-  int output_num_;
+		/* DON'T change this function's signature */
+		void emit(const std::string& key, const std::string& val);
+
+		/* NOW you can add below, data members and member functions as per the need of your implementation*/
+		void set_metada(std::string output_dir, int num_ouput, int shard_id, std::string user_id) {
+		    output_dir = output_dir;
+		    num_output = num_ouput;
+		    for (int i = 0; i < num_ouput; i++) {
+		        std::string output_file_path = output_dir + "/" + user_id + "_intermediate_shard_" + std::to_string(shard_id) + "_" + std::to_string(i);
+		        output_files.emplace_back(output_file_path);
+		        output_file_iter.emplace_back(std::ofstream(output_files[i], std::ios::binary | std::ios::app));
+		    }
+		}
+
+		void close_files() {
+		    for (auto& output_iter : output_file_iter)
+		        output_iter.close();
+		}
+
+		std::string output_dir;
+		std::string user_id;
+		int num_output;
+		std::vector<std::ofstream> output_file_iter;
+		std::vector<std::string> output_files;
 };
 
-/* CS6210_TASK Implement this function */
-inline BaseMapperInternal::BaseMapperInternal() {}
-
-inline std::string BaseMapperInternal::hash2key(const std::string& key) {
-  std::hash<std::string> hash_func;
-  std::string temp_file =
-      "temp/temp" +
-      std::to_string(hash_func(const_cast<std::string&>(key)) % output_num_) +
-      ".txt";
-  return temp_file;
-}
 
 /* CS6210_TASK Implement this function */
-inline void BaseMapperInternal::emit(const std::string& key,
-                                     const std::string& val) {
-  // periodically, write results of lines into intermediate files.
-  std::lock_guard<std::mutex> lock(mutex_);
-  std::string filename = hash2key(key);
-  std::ofstream myfile(filename, std::ios::app);
-  if (myfile.is_open()) {
-    myfile << key << " " << val << std::endl;
-    myfile.close();
-  } else {
-    std::cerr << "Failed to open file " << filename << std::endl;
-    exit(-1);
-  }
-  temp_files_.insert(filename);
+inline BaseMapperInternal::BaseMapperInternal() {
+
 }
+
+
+/* CS6210_TASK Implement this function */
+inline void BaseMapperInternal::emit(const std::string& key, const std::string& val) {
+    int output_index = std::hash<std::string>{}(key) % num_output;
+    output_file_iter[output_index] << key << " " << val << "\n";
+}
+
 
 /*-----------------------------------------------------------------------------------------------*/
 
+
 /* CS6210_TASK Implement this data structureas per your implementation.
-    You will need this when your worker is running the reduce task*/
+		You will need this when your worker is running the reduce task*/
 struct BaseReducerInternal {
-  /* DON'T change this function's signature */
-  BaseReducerInternal();
 
-  /* DON'T change this function's signature */
-  void emit(const std::string& key, const std::string& val);
+		/* DON'T change this function's signature */
+		BaseReducerInternal();
 
-  /* NOW you can add below, data members and member functions as per the need of
-   * your implementation*/
-  int file_number_;
-  std::mutex mutex_;
-  std::string output_dir_;
+		/* DON'T change this function's signature */
+		void emit(const std::string& key, const std::string& val);
+
+		/* NOW you can add below, data members and member functions as per the need of your implementation*/
+		void set_metadata(std::string output_dir, int reducer_id, std::string user_id) {
+		    std::string output_file_path = output_dir + "/" + user_id + "_result_" + std::to_string(reducer_id);
+            this->reducer_id = reducer_id;
+
+            out_file = std::ofstream(output_file_path, std::ios::binary | std::ios::app);
+		}
+
+		void close_file() { out_file.close(); }
+
+		int reducer_id;
+		std::ofstream out_file;
+		std::string user_id;
 };
 
-/* CS6210_TASK Implement this function */
-inline BaseReducerInternal::BaseReducerInternal() {}
 
 /* CS6210_TASK Implement this function */
-inline void BaseReducerInternal::emit(const std::string& key,
-                                      const std::string& val) {
-  std::lock_guard<std::mutex> lock(mutex_);
+inline BaseReducerInternal::BaseReducerInternal() {
 
-  std::string filename =
-      "output/output" + std::to_string(file_number_) + ".txt";
-  std::ofstream myfile(filename, std::ios::app);
-  if (myfile.is_open()) {
-    myfile << key << " " << val << std::endl;
-    myfile.close();
-  } else {
-    std::cerr << "Failed to open file " << filename << std::endl;
-    exit(-1);
-  }
+}
+
+
+/* CS6210_TASK Implement this function */
+inline void BaseReducerInternal::emit(const std::string& key, const std::string& val) {
+    out_file << key << " " << val << "\n";
 }

@@ -97,21 +97,13 @@ mr_task_factory.h
 -
 
 /aos/projects/src/mr_tasks.h
-fstream
--
-functional
+string
 -
 iostream
 -
-string
--
-mutex
--
-unordered_map
--
-unordered_set
--
 vector
+-
+fstream
 -
 
 /aos/projects/src/run_worker.cc
@@ -119,22 +111,24 @@ worker.h
 /aos/projects/src/worker.h
 
 /aos/projects/src/worker.h
-grpc++/grpc++.h
--
-grpc/support/log.h
--
 mr_task_factory.h
+-
+mr_tasks.h
+/aos/projects/src/mr_tasks.h
+grpc/grpc.h
+-
+grpc++/server.h
+-
+grpc++/server_builder.h
 -
 fstream
 -
-iostream
--
-unordered_set
+sstream
 -
 masterworker.grpc.pb.h
 /aos/projects/src/masterworker.grpc.pb.h
-mr_tasks.h
-/aos/projects/src/mr_tasks.h
+masterworker.pb.h
+/aos/projects/src/masterworker.pb.h
 
 external/include/mr_task_factory.h
 iostream

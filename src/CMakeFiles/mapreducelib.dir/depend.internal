@@ -15,5 +15,3 @@ src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o
  /aos/projects/src/master.h
  /aos/projects/src/masterworker.grpc.pb.h
  /aos/projects/src/masterworker.pb.h
- /aos/projects/src/smart_ptrs.h
- /aos/projects/src/thread_pool.h

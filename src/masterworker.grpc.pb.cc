@@ -21,60 +21,102 @@
 #include <grpcpp/impl/codegen/sync_stream.h>
 namespace masterworker {
 
-static const char* MasterWorker_method_names[] = {
-  "/masterworker.MasterWorker/mapReduce",
+static const char* WorkerService_method_names[] = {
+  "/masterworker.WorkerService/RegisterMapService",
+  "/masterworker.WorkerService/RegisterReduceService",
 };
 
-std::unique_ptr< MasterWorker::Stub> MasterWorker::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+std::unique_ptr< WorkerService::Stub> WorkerService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
   (void)options;
-  std::unique_ptr< MasterWorker::Stub> stub(new MasterWorker::Stub(channel));
+  std::unique_ptr< WorkerService::Stub> stub(new WorkerService::Stub(channel));
   return stub;
 }
 
-MasterWorker::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_mapReduce_(MasterWorker_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+WorkerService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
+  : channel_(channel), rpcmethod_RegisterMapService_(WorkerService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_RegisterReduceService_(WorkerService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status MasterWorker::Stub::mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::masterworker::WorkerReply* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::masterworker::MasterQuery, ::masterworker::WorkerReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_mapReduce_, context, request, response);
+::grpc::Status WorkerService::Stub::RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::masterworker::MapReply* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::masterworker::MapRequest, ::masterworker::MapReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RegisterMapService_, context, request, response);
 }
 
-void MasterWorker::Stub::experimental_async::mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::masterworker::MasterQuery, ::masterworker::WorkerReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_mapReduce_, context, request, response, std::move(f));
+void WorkerService::Stub::experimental_async::RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::masterworker::MapRequest, ::masterworker::MapReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RegisterMapService_, context, request, response, std::move(f));
 }
 
-void MasterWorker::Stub::experimental_async::mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_mapReduce_, context, request, response, reactor);
+void WorkerService::Stub::experimental_async::RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RegisterMapService_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>* MasterWorker::Stub::PrepareAsyncmapReduceRaw(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::WorkerReply, ::masterworker::MasterQuery, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_mapReduce_, context, request);
+::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>* WorkerService::Stub::PrepareAsyncRegisterMapServiceRaw(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::MapReply, ::masterworker::MapRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RegisterMapService_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>* MasterWorker::Stub::AsyncmapReduceRaw(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>* WorkerService::Stub::AsyncRegisterMapServiceRaw(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
-    this->PrepareAsyncmapReduceRaw(context, request, cq);
+    this->PrepareAsyncRegisterMapServiceRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-MasterWorker::Service::Service() {
+::grpc::Status WorkerService::Stub::RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::masterworker::ReduceReply* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::masterworker::ReduceRequest, ::masterworker::ReduceReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RegisterReduceService_, context, request, response);
+}
+
+void WorkerService::Stub::experimental_async::RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::masterworker::ReduceRequest, ::masterworker::ReduceReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RegisterReduceService_, context, request, response, std::move(f));
+}
+
+void WorkerService::Stub::experimental_async::RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RegisterReduceService_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>* WorkerService::Stub::PrepareAsyncRegisterReduceServiceRaw(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::masterworker::ReduceReply, ::masterworker::ReduceRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RegisterReduceService_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>* WorkerService::Stub::AsyncRegisterReduceServiceRaw(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncRegisterReduceServiceRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+WorkerService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      MasterWorker_method_names[0],
+      WorkerService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< MasterWorker::Service, ::masterworker::MasterQuery, ::masterworker::WorkerReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](MasterWorker::Service* service,
+      new ::grpc::internal::RpcMethodHandler< WorkerService::Service, ::masterworker::MapRequest, ::masterworker::MapReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](WorkerService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::masterworker::MasterQuery* req,
-             ::masterworker::WorkerReply* resp) {
-               return service->mapReduce(ctx, req, resp);
+             const ::masterworker::MapRequest* req,
+             ::masterworker::MapReply* resp) {
+               return service->RegisterMapService(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      WorkerService_method_names[1],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< WorkerService::Service, ::masterworker::ReduceRequest, ::masterworker::ReduceReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](WorkerService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::masterworker::ReduceRequest* req,
+             ::masterworker::ReduceReply* resp) {
+               return service->RegisterReduceService(ctx, req, resp);
              }, this)));
 }
 
-MasterWorker::Service::~Service() {
+WorkerService::Service::~Service() {
 }
 
-::grpc::Status MasterWorker::Service::mapReduce(::grpc::ServerContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response) {
+::grpc::Status WorkerService::Service::RegisterMapService(::grpc::ServerContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status WorkerService::Service::RegisterReduceService(::grpc::ServerContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response) {
   (void) context;
   (void) request;
   (void) response;

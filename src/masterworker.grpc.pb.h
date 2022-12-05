@@ -28,30 +28,42 @@
 
 namespace masterworker {
 
-// The masterworker service definition.
-class MasterWorker final {
+class WorkerService final {
  public:
   static constexpr char const* service_full_name() {
-    return "masterworker.MasterWorker";
+    return "masterworker.WorkerService";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::masterworker::WorkerReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::WorkerReply>> AsyncmapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::WorkerReply>>(AsyncmapReduceRaw(context, request, cq));
+    virtual ::grpc::Status RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::masterworker::MapReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapReply>> AsyncRegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapReply>>(AsyncRegisterMapServiceRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::WorkerReply>> PrepareAsyncmapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::WorkerReply>>(PrepareAsyncmapReduceRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapReply>> PrepareAsyncRegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapReply>>(PrepareAsyncRegisterMapServiceRaw(context, request, cq));
+    }
+    virtual ::grpc::Status RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::masterworker::ReduceReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceReply>> AsyncRegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceReply>>(AsyncRegisterReduceServiceRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceReply>> PrepareAsyncRegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceReply>>(PrepareAsyncRegisterReduceServiceRaw(context, request, cq));
     }
     class experimental_async_interface {
      public:
       virtual ~experimental_async_interface() {}
-      virtual void mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, std::function<void(::grpc::Status)>) = 0;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      virtual void mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       #else
-      virtual void mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      virtual void RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
+      #endif
+      virtual void RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, std::function<void(::grpc::Status)>) = 0;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      virtual void RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      #else
+      virtual void RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) = 0;
       #endif
     };
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
@@ -62,27 +74,42 @@ class MasterWorker final {
     #endif
     virtual class experimental_async_interface* experimental_async() { return nullptr; }
   private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::WorkerReply>* AsyncmapReduceRaw(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::WorkerReply>* PrepareAsyncmapReduceRaw(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapReply>* AsyncRegisterMapServiceRaw(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::MapReply>* PrepareAsyncRegisterMapServiceRaw(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceReply>* AsyncRegisterReduceServiceRaw(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::masterworker::ReduceReply>* PrepareAsyncRegisterReduceServiceRaw(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
-    ::grpc::Status mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::masterworker::WorkerReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>> AsyncmapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>>(AsyncmapReduceRaw(context, request, cq));
+    ::grpc::Status RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::masterworker::MapReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>> AsyncRegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>>(AsyncRegisterMapServiceRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>> PrepareAsyncmapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>>(PrepareAsyncmapReduceRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>> PrepareAsyncRegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>>(PrepareAsyncRegisterMapServiceRaw(context, request, cq));
+    }
+    ::grpc::Status RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::masterworker::ReduceReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>> AsyncRegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>>(AsyncRegisterReduceServiceRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>> PrepareAsyncRegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>>(PrepareAsyncRegisterReduceServiceRaw(context, request, cq));
     }
     class experimental_async final :
       public StubInterface::experimental_async_interface {
      public:
-      void mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, std::function<void(::grpc::Status)>) override;
+      void RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, std::function<void(::grpc::Status)>) override;
       #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-      void mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       #else
-      void mapReduce(::grpc::ClientContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      void RegisterMapService(::grpc::ClientContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
+      #endif
+      void RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, std::function<void(::grpc::Status)>) override;
+      #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      void RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      #else
+      void RegisterReduceService(::grpc::ClientContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response, ::grpc::experimental::ClientUnaryReactor* reactor) override;
       #endif
      private:
       friend class Stub;
@@ -95,9 +122,12 @@ class MasterWorker final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class experimental_async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>* AsyncmapReduceRaw(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::masterworker::WorkerReply>* PrepareAsyncmapReduceRaw(::grpc::ClientContext* context, const ::masterworker::MasterQuery& request, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_mapReduce_;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>* AsyncRegisterMapServiceRaw(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::MapReply>* PrepareAsyncRegisterMapServiceRaw(::grpc::ClientContext* context, const ::masterworker::MapRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>* AsyncRegisterReduceServiceRaw(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::masterworker::ReduceReply>* PrepareAsyncRegisterReduceServiceRaw(::grpc::ClientContext* context, const ::masterworker::ReduceRequest& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_RegisterMapService_;
+    const ::grpc::internal::RpcMethod rpcmethod_RegisterReduceService_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -105,124 +135,229 @@ class MasterWorker final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status mapReduce(::grpc::ServerContext* context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response);
+    virtual ::grpc::Status RegisterMapService(::grpc::ServerContext* context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response);
+    virtual ::grpc::Status RegisterReduceService(::grpc::ServerContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response);
   };
   template <class BaseClass>
-  class WithAsyncMethod_mapReduce : public BaseClass {
+  class WithAsyncMethod_RegisterMapService : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithAsyncMethod_mapReduce() {
+    WithAsyncMethod_RegisterMapService() {
       ::grpc::Service::MarkMethodAsync(0);
     }
-    ~WithAsyncMethod_mapReduce() override {
+    ~WithAsyncMethod_RegisterMapService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status mapReduce(::grpc::ServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/) override {
+    ::grpc::Status RegisterMapService(::grpc::ServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestmapReduce(::grpc::ServerContext* context, ::masterworker::MasterQuery* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::WorkerReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestRegisterMapService(::grpc::ServerContext* context, ::masterworker::MapRequest* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::MapReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_mapReduce<Service > AsyncService;
   template <class BaseClass>
-  class ExperimentalWithCallbackMethod_mapReduce : public BaseClass {
+  class WithAsyncMethod_RegisterReduceService : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    ExperimentalWithCallbackMethod_mapReduce() {
+    WithAsyncMethod_RegisterReduceService() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_RegisterReduceService() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterReduceService(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRegisterReduceService(::grpc::ServerContext* context, ::masterworker::ReduceRequest* request, ::grpc::ServerAsyncResponseWriter< ::masterworker::ReduceReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_RegisterMapService<WithAsyncMethod_RegisterReduceService<Service > > AsyncService;
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_RegisterMapService : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_RegisterMapService() {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       ::grpc::Service::
     #else
       ::grpc::Service::experimental().
     #endif
         MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::MasterQuery, ::masterworker::WorkerReply>(
+          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::MapRequest, ::masterworker::MapReply>(
             [this](
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
                    ::grpc::CallbackServerContext*
     #else
                    ::grpc::experimental::CallbackServerContext*
     #endif
-                     context, const ::masterworker::MasterQuery* request, ::masterworker::WorkerReply* response) { return this->mapReduce(context, request, response); }));}
-    void SetMessageAllocatorFor_mapReduce(
-        ::grpc::experimental::MessageAllocator< ::masterworker::MasterQuery, ::masterworker::WorkerReply>* allocator) {
+                     context, const ::masterworker::MapRequest* request, ::masterworker::MapReply* response) { return this->RegisterMapService(context, request, response); }));}
+    void SetMessageAllocatorFor_RegisterMapService(
+        ::grpc::experimental::MessageAllocator< ::masterworker::MapRequest, ::masterworker::MapReply>* allocator) {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
     #else
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(0);
     #endif
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::MasterQuery, ::masterworker::WorkerReply>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::MapRequest, ::masterworker::MapReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
-    ~ExperimentalWithCallbackMethod_mapReduce() override {
+    ~ExperimentalWithCallbackMethod_RegisterMapService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status mapReduce(::grpc::ServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/) override {
+    ::grpc::Status RegisterMapService(::grpc::ServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* mapReduce(
-      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/)
+    virtual ::grpc::ServerUnaryReactor* RegisterMapService(
+      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/)
     #else
-    virtual ::grpc::experimental::ServerUnaryReactor* mapReduce(
-      ::grpc::experimental::CallbackServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/)
+    virtual ::grpc::experimental::ServerUnaryReactor* RegisterMapService(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class ExperimentalWithCallbackMethod_RegisterReduceService : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithCallbackMethod_RegisterReduceService() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::masterworker::ReduceRequest, ::masterworker::ReduceReply>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response) { return this->RegisterReduceService(context, request, response); }));}
+    void SetMessageAllocatorFor_RegisterReduceService(
+        ::grpc::experimental::MessageAllocator< ::masterworker::ReduceRequest, ::masterworker::ReduceReply>* allocator) {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+    #else
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::experimental().GetHandler(1);
+    #endif
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::masterworker::ReduceRequest, ::masterworker::ReduceReply>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~ExperimentalWithCallbackMethod_RegisterReduceService() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterReduceService(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* RegisterReduceService(
+      ::grpc::CallbackServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* RegisterReduceService(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/)
     #endif
       { return nullptr; }
   };
   #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-  typedef ExperimentalWithCallbackMethod_mapReduce<Service > CallbackService;
+  typedef ExperimentalWithCallbackMethod_RegisterMapService<ExperimentalWithCallbackMethod_RegisterReduceService<Service > > CallbackService;
   #endif
 
-  typedef ExperimentalWithCallbackMethod_mapReduce<Service > ExperimentalCallbackService;
+  typedef ExperimentalWithCallbackMethod_RegisterMapService<ExperimentalWithCallbackMethod_RegisterReduceService<Service > > ExperimentalCallbackService;
   template <class BaseClass>
-  class WithGenericMethod_mapReduce : public BaseClass {
+  class WithGenericMethod_RegisterMapService : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithGenericMethod_mapReduce() {
+    WithGenericMethod_RegisterMapService() {
       ::grpc::Service::MarkMethodGeneric(0);
     }
-    ~WithGenericMethod_mapReduce() override {
+    ~WithGenericMethod_RegisterMapService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status mapReduce(::grpc::ServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/) override {
+    ::grpc::Status RegisterMapService(::grpc::ServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
   };
   template <class BaseClass>
-  class WithRawMethod_mapReduce : public BaseClass {
+  class WithGenericMethod_RegisterReduceService : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithRawMethod_mapReduce() {
-      ::grpc::Service::MarkMethodRaw(0);
+    WithGenericMethod_RegisterReduceService() {
+      ::grpc::Service::MarkMethodGeneric(1);
     }
-    ~WithRawMethod_mapReduce() override {
+    ~WithGenericMethod_RegisterReduceService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status mapReduce(::grpc::ServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/) override {
+    ::grpc::Status RegisterReduceService(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestmapReduce(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+  };
+  template <class BaseClass>
+  class WithRawMethod_RegisterMapService : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_RegisterMapService() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_RegisterMapService() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterMapService(::grpc::ServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRegisterMapService(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
-  class ExperimentalWithRawCallbackMethod_mapReduce : public BaseClass {
+  class WithRawMethod_RegisterReduceService : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    ExperimentalWithRawCallbackMethod_mapReduce() {
+    WithRawMethod_RegisterReduceService() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_RegisterReduceService() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterReduceService(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestRegisterReduceService(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class ExperimentalWithRawCallbackMethod_RegisterMapService : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    ExperimentalWithRawCallbackMethod_RegisterMapService() {
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
       ::grpc::Service::
     #else
@@ -236,55 +371,120 @@ class MasterWorker final {
     #else
                    ::grpc::experimental::CallbackServerContext*
     #endif
-                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->mapReduce(context, request, response); }));
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->RegisterMapService(context, request, response); }));
     }
-    ~ExperimentalWithRawCallbackMethod_mapReduce() override {
+    ~ExperimentalWithRawCallbackMethod_RegisterMapService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status mapReduce(::grpc::ServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/) override {
+    ::grpc::Status RegisterMapService(::grpc::ServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
-    virtual ::grpc::ServerUnaryReactor* mapReduce(
+    virtual ::grpc::ServerUnaryReactor* RegisterMapService(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
     #else
-    virtual ::grpc::experimental::ServerUnaryReactor* mapReduce(
+    virtual ::grpc::experimental::ServerUnaryReactor* RegisterMapService(
       ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
     #endif
       { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_mapReduce : public BaseClass {
+  class ExperimentalWithRawCallbackMethod_RegisterReduceService : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
-    WithStreamedUnaryMethod_mapReduce() {
+    ExperimentalWithRawCallbackMethod_RegisterReduceService() {
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+      ::grpc::Service::
+    #else
+      ::grpc::Service::experimental().
+    #endif
+        MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+                   ::grpc::CallbackServerContext*
+    #else
+                   ::grpc::experimental::CallbackServerContext*
+    #endif
+                     context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->RegisterReduceService(context, request, response); }));
+    }
+    ~ExperimentalWithRawCallbackMethod_RegisterReduceService() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status RegisterReduceService(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    #ifdef GRPC_CALLBACK_API_NONEXPERIMENTAL
+    virtual ::grpc::ServerUnaryReactor* RegisterReduceService(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #else
+    virtual ::grpc::experimental::ServerUnaryReactor* RegisterReduceService(
+      ::grpc::experimental::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)
+    #endif
+      { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RegisterMapService : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_RegisterMapService() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::masterworker::MasterQuery, ::masterworker::WorkerReply>(
+          ::masterworker::MapRequest, ::masterworker::MapReply>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::masterworker::MasterQuery, ::masterworker::WorkerReply>* streamer) {
-                       return this->StreamedmapReduce(context,
+                     ::masterworker::MapRequest, ::masterworker::MapReply>* streamer) {
+                       return this->StreamedRegisterMapService(context,
                          streamer);
                   }));
     }
-    ~WithStreamedUnaryMethod_mapReduce() override {
+    ~WithStreamedUnaryMethod_RegisterMapService() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status mapReduce(::grpc::ServerContext* /*context*/, const ::masterworker::MasterQuery* /*request*/, ::masterworker::WorkerReply* /*response*/) override {
+    ::grpc::Status RegisterMapService(::grpc::ServerContext* /*context*/, const ::masterworker::MapRequest* /*request*/, ::masterworker::MapReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedmapReduce(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::MasterQuery,::masterworker::WorkerReply>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedRegisterMapService(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::MapRequest,::masterworker::MapReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_mapReduce<Service > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_RegisterReduceService : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_RegisterReduceService() {
+      ::grpc::Service::MarkMethodStreamed(1,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::masterworker::ReduceRequest, ::masterworker::ReduceReply>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::masterworker::ReduceRequest, ::masterworker::ReduceReply>* streamer) {
+                       return this->StreamedRegisterReduceService(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_RegisterReduceService() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status RegisterReduceService(::grpc::ServerContext* /*context*/, const ::masterworker::ReduceRequest* /*request*/, ::masterworker::ReduceReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedRegisterReduceService(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::masterworker::ReduceRequest,::masterworker::ReduceReply>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_RegisterMapService<WithStreamedUnaryMethod_RegisterReduceService<Service > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_mapReduce<Service > StreamedService;
+  typedef WithStreamedUnaryMethod_RegisterMapService<WithStreamedUnaryMethod_RegisterReduceService<Service > > StreamedService;
 };
 
 }  // namespace masterworker
