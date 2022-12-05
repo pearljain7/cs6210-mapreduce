@@ -13,6 +13,11 @@
 /* CS6210_TASK: Handle all the task a Worker is supposed to do.
 	This is a big task for this project, will test your understanding of map reduce */
 class Worker : public masterworker::WorkerService::Service {
+    // Worker is a friend class of Mapper and Reducer. 
+	// Hence, worker can directly map changes to it private members of the Mapper and Reducer implementations. 
+	// Hence, you can provide the impl a struct to which implmentor can write in the emit function.
+	// Once that struct is populated, worker dumps that struct into the disk. 
+
 
 	public:
 		/* DON'T change the function signature of this constructor */
@@ -26,6 +31,7 @@ class Worker : public masterworker::WorkerService::Service {
         grpc::Status RegisterReduceService(::grpc::ServerContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response) override;
 	private:
 		/* NOW you can add below, data members and member functions as per the need of your implementation*/
+        // Could be constants, data variables, 
 		std::string ip_addr_port_;
 
 };
@@ -49,12 +55,26 @@ extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::str
 bool Worker::run() {
 	/*  Below 5 lines are just examples of how you will call map and reduce
 		Remove them once you start writing your own logic */
+
+        // TODO 
+
+	/*
+		Keep on looking for a new map or reduce task provided by the master.
+		Once it gets a new task, it has to process it and communicate its completion to the Master via a protocol
+		Continue waiting for a new task.
+		Eg. if you get a map task, use `get_mapper_from_task_factory` to get the mapping algorithm.
+		Master should also be sending the userId for the map task. 
+		Perform any required book-keeping. Then call mapper.map() to run user's algorithm for mapping.
+		Dump the output in local disk for both mapper and reducer (different from paper).
+	*/
 	grpc::ServerBuilder builder;
 	builder.AddListeningPort(ip_addr_port_, grpc::InsecureServerCredentials());
     builder.RegisterService(this);
     std::unique_ptr<grpc::Server> server = builder.BuildAndStart();
     std::cout << "server started" << std::endl;
     // Waits for the server to finish.
+    // auto reducer = get_reducer_from_task_factory("cs6210");
+	// reducer->reduce("dummy", std::vector<std::string>({"1", "1"}));
     server->Wait();
 
 	return true;
@@ -81,7 +101,7 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
         std::string content;
 
         while (file.tellg() < end_offset && getline(file, content)) {
-//            std::cout << "mapping content: " << content << std::endl;
+        //std::cout << "mapping content: " << content << std::endl;
             mapper->map(content);
         }
 

@@ -66,7 +66,7 @@ public:
 
     void SendMapRequestToWorker(const masterworker::MapRequest &request) {
         if (worker_metadata.status_ != WorkerData::Idle) {
-            std::cerr << "you should not send request to worker that is not idle, current status is: " << worker_metadata.status_ << std::endl;
+            std::cerr << "Sending request to idle worker is not recommended. Current status is: " << worker_metadata.status_ << std::endl;
             throw 1;
         }
 
@@ -87,7 +87,7 @@ public:
 
     void SendReduceRequestToWorker(const masterworker::ReduceRequest &request) {
         if (worker_metadata.status_ != WorkerData::Idle) {
-            std::cerr << "you should not send request to worker that is not idle" << std::endl;
+            std::cerr << "Sending request to idle worker is not recommended." << std::endl;
             throw 1;
         }
 
@@ -107,7 +107,7 @@ public:
     }
 
     bool check_status() {
-        std::cout << "checking status" << std::endl;
+        std::cout << "Checking Status" << std::endl;
         void* got_tag;
         bool ok = false;
         std::chrono::system_clock::time_point delay = std::chrono::system_clock::now() + std::chrono::seconds(TIME_OUT);
@@ -163,7 +163,7 @@ class Master {
 	public:
 		/* DON'T change the function signature of this constructor */
 		Master(const MapReduceSpec&, const std::vector<FileShard>&);
-
+    // Make sure to send all info via MapReduceSpec struct to the Master
 		/* DON'T change this function's signature */
 		bool run();
 
@@ -175,7 +175,7 @@ class Master {
 		}
 
     private:
-
+      
 	    void assign_available_worker_to_jobs(WorkType work_type);
 
 
@@ -202,6 +202,7 @@ class Master {
 /* CS6210_TASK: This is all the information your master will get from the framework.
 	You can populate your other class data members here if you want */
 Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_shards) {
+    //TODO
     for (int worker_id = 0; worker_id < mr_spec.num_workers; worker_id++) {
         WorkerData cur_data = WorkerData(mr_spec.worker_ipaddr[worker_id], worker_id);
         worker_clients_.emplace_back(WorkerClient(cur_data));
@@ -240,6 +241,19 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
 
 /* CS6210_TASK: Here you go. once this function is called you will complete whole map reduce task and return true if succeeded */
 bool Master::run() {
+  // TODO.
+	/*
+		Assign tasks to workers and communicate their respective instructions (eg. userid etc).
+		This is done via gRPC using the file - masterworker.proto file.
+		You come up with a gRPC specific interface to communicate bwteen the master (client) and worker (server) 
+	*/
+	/*
+	Perform book keeping.
+	Restart process if a worker is not responding on a different node (worker). 
+	Keep track of all running mappers and reducers. 
+	Communicate between mapper results (set of intermediate files on local) and pass this info to the reduce to operate and generate the final output file.
+	
+	*/
     while (!task_all_finished(map_request_status_)) {
         assign_available_worker_to_jobs(MAP);
 
