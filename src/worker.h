@@ -13,11 +13,9 @@
 /* CS6210_TASK: Handle all the task a Worker is supposed to do.
 	This is a big task for this project, will test your understanding of map reduce */
 class Worker : public masterworker::WorkerService::Service {
-    // Worker is a friend class of Mapper and Reducer. 
-	// Hence, worker can directly map changes to it private members of the Mapper and Reducer implementations. 
-	// Hence, you can provide the impl a struct to which implmentor can write in the emit function.
-	// Once that struct is populated, worker dumps that struct into the disk. 
-
+    /* Worker is a friend class of Mapper and Reducer. Hence, worker can directly map changes to it private members of the Mapper and Reducer implementations. 
+	    Hence, a struct to which implmentor can write in the emit function.
+        Once that struct is populated, worker dumps that struct into the disk. */
 
 	public:
 		/* DON'T change the function signature of this constructor */
@@ -31,7 +29,6 @@ class Worker : public masterworker::WorkerService::Service {
         grpc::Status RegisterReduceService(::grpc::ServerContext* context, const ::masterworker::ReduceRequest* request, ::masterworker::ReduceReply* response) override;
 	private:
 		/* NOW you can add below, data members and member functions as per the need of your implementation*/
-        // Could be constants, data variables, 
 		std::string ip_addr_port_;
 
 };
@@ -68,7 +65,6 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
     std::string user_id = request->user_id();
     uint32_t num_output = request->n_output();
     uint32_t shard_id = request->shard_id();
-    std::cout << "Recieved map request for user id: " << user_id << " shard id: " << shard_id << std::endl;
 
     std::shared_ptr<BaseMapper> mapper = get_mapper_from_task_factory(user_id);
     mapper->impl_->set_metada(output_dir, num_output, shard_id, user_id);
@@ -77,7 +73,6 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
         std::string file_path = shard_info.file_addr();
         int start_offset = shard_info.start_offest();
         int end_offset = shard_info.end_offset();
-
         std::ifstream file(file_path, std::ifstream::binary);
         file.seekg(start_offset, std::istream::ios_base::beg); 
         std::string content;
@@ -102,11 +97,8 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
     std::vector<std::string> intermediate_input_files;
     int reducer_id = request->reducer_id();
 
-    std::cout << "Recieved reduce request with user id: " << user_id << " reducer id: " << reducer_id << std::endl;
-
     for (int file_id = 0; file_id < request->intermediate_file_address_size(); file_id++) {
         intermediate_input_files.emplace_back(request->intermediate_file_address(file_id));
-        std::cout << "Reducer: " << std::to_string(reducer_id) << " fetching input file: " << intermediate_input_files.back() << std::endl;
     }
 
     std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(user_id);
