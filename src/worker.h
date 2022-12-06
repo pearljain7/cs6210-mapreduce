@@ -69,7 +69,7 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
     std::shared_ptr<BaseMapper> mapper = get_mapper_from_task_factory(user_id);
     mapper->impl_->set_metada(output_dir, num_output, shard_id, user_id);
 
-    for (masterworker::ShardInfo shard_info : request->shards()) {
+    for (masterworker::ShardInfo shard_info: request->shards()) {
         std::string file_path = shard_info.file_addr();
         int start_offset = shard_info.start_offest();
         int end_offset = shard_info.end_offset();
@@ -95,14 +95,14 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
     std::string user_id = request->user_id();
     std::string output_dir = request->output_dir();
     std::vector<std::string> intermediate_input_files;
-    int reducer_id = request->reducer_id();
+    int id = request->reducer_id();
 
     for (int file_id = 0; file_id < request->intermediate_file_address_size(); file_id++) {
         intermediate_input_files.emplace_back(request->intermediate_file_address(file_id));
     }
 
     std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(user_id);
-    reducer->impl_->set_metadata(output_dir, reducer_id, user_id);
+    reducer->impl_->set_metadata(output_dir, id, user_id);
     std::map<std::string, std::vector<std::string>> combined_resource;
 
     std::string line;
@@ -115,7 +115,6 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
             iss >> value;
             combined_resource[key].emplace_back(value);
         }
-
         file.close();
     }
 

@@ -71,7 +71,6 @@ struct BaseReducerInternal {
 		void set_metadata(std::string output_dir, int reducer_id, std::string user_id) {
 		    std::string output_file_path = output_dir + "/" + user_id + "_result_" + std::to_string(reducer_id);
             this->reducer_id = reducer_id;
-
             out_file = std::ofstream(output_file_path, std::ios::binary | std::ios::app);
 		}
 
@@ -91,6 +90,6 @@ inline BaseReducerInternal::BaseReducerInternal() {
 
 /* CS6210_TASK Implement this function */
 inline void BaseReducerInternal::emit(const std::string& key, const std::string& val) {
-  	/* Collect the informatation passed to this emit function in one data strcut for the worker to dump */
+  	// Collect the informatation passed to this emit function in one data struct for the worker to dump */
     out_file << key << " " << val << "\n";
 }

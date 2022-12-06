@@ -27,19 +27,19 @@ It holds the following information:
 * input_files: List of input files
 
 ### mr_tasks.h
-* function `emit()` is responsible to ouput the results to files
+* Function `emit()` writes the results to files. 
 
 ### master.h
 * Struct `RequestData` contains `WorkType` information {MAP or REDUCE} and `RequestStatus` {NOT_STARTED, PROCESSING, FINISHED}.
 * Struct `WorkerData` contains worker's ip address, worker id, `WorkerStatus` information {BUSY, IDLE, DOWN} to indicate current status of the worker. 
-* `Master` is responsible to assign tasks to worker threads and perform book keeping on the worker statuses. Ot keeps track of all running workers and communicates between mapper and reducer. The communication is done via gRPC using the file `masterworker.proto`.
-* `WorkerClient` performs the job of establishing connection with the workers and process response (if success or failure).
+* `Master` is responsible to assign tasks to worker threads and perform book keeping on the worker statuses. It keeps track of all running workers and communicates between mapper and reducer. The communication is done via gRPC using the file `masterworker.proto`.
+* `WorkerClient` performs the job of establishing connection with the workers and process response (if success or failure). 
 
 ### worker.h
 * `run()` method in worker listens for a new map or reduce task provided by the master. 
 Once it gets a new task, it processes it and communicate the completion to the Master via the specified protocol.
-* `RegisterMapService()` is triggered for processing a map request. It calls the `get_mapper_from_task_factory()` to get the mapper implementation with mapping algorithm to run on the request.
-* `RegisterReduceService()` is triggers for processing a reduce request. It calls the `get_reducer_from_task_factory()` which has the reducer implementation to run on the reduce request. 
+* `RegisterMapService()` is triggered for processing a map request. It calls the `get_mapper_from_task_factory()` to get the mapper implementation with mapping algorithm to run on the request. `map()` function is called on every shard present in the request.
+* `RegisterReduceService()` is triggers for processing a reduce request. It calls the `get_reducer_from_task_factory()` which has the reducer implementation to run on the reduce request. We create a map for all (key -> list of values) mapping from files that can be found in `intermediate_input_files` reduce request parameter. The reduce function is run of this map.
 
 ### Handling slow worker
 
