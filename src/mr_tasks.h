@@ -91,7 +91,6 @@ inline BaseReducerInternal::BaseReducerInternal() {
 
 /* CS6210_TASK Implement this function */
 inline void BaseReducerInternal::emit(const std::string& key, const std::string& val) {
-  /* Collect the informatation passed to this emit function in one data strcut for the worker to dump */
-	// TODO
+  	/* Collect the informatation passed to this emit function in one data strcut for the worker to dump */
     out_file << key << " " << val << "\n";
 }

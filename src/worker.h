@@ -53,30 +53,12 @@ extern std::shared_ptr<BaseReducer> get_reducer_from_task_factory(const std::str
 	BaseReduer's member BaseReducerInternal impl_ directly, 
 	so you can manipulate them however you want when running map/reduce tasks*/
 bool Worker::run() {
-	/*  Below 5 lines are just examples of how you will call map and reduce
-		Remove them once you start writing your own logic */
-
-        // TODO 
-
-	/*
-		Keep on looking for a new map or reduce task provided by the master.
-		Once it gets a new task, it has to process it and communicate its completion to the Master via a protocol
-		Continue waiting for a new task.
-		Eg. if you get a map task, use `get_mapper_from_task_factory` to get the mapping algorithm.
-		Master should also be sending the userId for the map task. 
-		Perform any required book-keeping. Then call mapper.map() to run user's algorithm for mapping.
-		Dump the output in local disk for both mapper and reducer (different from paper).
-	*/
 	grpc::ServerBuilder builder;
 	builder.AddListeningPort(ip_addr_port_, grpc::InsecureServerCredentials());
     builder.RegisterService(this);
     std::unique_ptr<grpc::Server> server = builder.BuildAndStart();
     std::cout << "Server started" << std::endl;
-    // Waits for the server to finish.
-    // auto reducer = get_reducer_from_task_factory("cs6210");
-	// reducer->reduce("dummy", std::vector<std::string>({"1", "1"}));
     server->Wait();
-
 	return true;
 }
 
@@ -86,7 +68,7 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
     std::string user_id = request->user_id();
     uint32_t num_output = request->n_output();
     uint32_t shard_id = request->shard_id();
-    std::cout << "recieved map request: " << "user id: " << user_id << " shard id: " << shard_id << std::endl;
+    std::cout << "Recieved map request for user id: " << user_id << " shard id: " << shard_id << std::endl;
 
     std::shared_ptr<BaseMapper> mapper = get_mapper_from_task_factory(user_id);
     mapper->impl_->set_metada(output_dir, num_output, shard_id, user_id);
@@ -97,14 +79,12 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
         int end_offset = shard_info.end_offset();
 
         std::ifstream file(file_path, std::ifstream::binary);
-        file.seekg(start_offset, std::istream::ios_base::beg); // seek the file stream from the begining
+        file.seekg(start_offset, std::istream::ios_base::beg); 
         std::string content;
 
         while (file.tellg() < end_offset && getline(file, content)) {
-        //std::cout << "mapping content: " << content << std::endl;
             mapper->map(content);
         }
-
         file.close();
     }
 
@@ -113,7 +93,6 @@ grpc::Status Worker::RegisterMapService(::grpc::ServerContext* context, const ::
     for (int i = 0; i < mapper->impl_->output_files.size(); i++) {
         response->add_intermediate_file_location(mapper->impl_->output_files[i]);
     }
-
     return grpc::Status();
 }
 
@@ -123,7 +102,7 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
     std::vector<std::string> intermediate_input_files;
     int reducer_id = request->reducer_id();
 
-    std::cout << "recieved reduce request: " << "user id: " << user_id << " reducer id: " << reducer_id << std::endl;
+    std::cout << "Recieved reduce request with user id: " << user_id << " reducer id: " << reducer_id << std::endl;
 
     for (int file_id = 0; file_id < request->intermediate_file_address_size(); file_id++) {
         intermediate_input_files.emplace_back(request->intermediate_file_address(file_id));
@@ -132,7 +111,6 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
 
     std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(user_id);
     reducer->impl_->set_metadata(output_dir, reducer_id, user_id);
-
     std::map<std::string, std::vector<std::string>> combined_resource;
 
     std::string line;
@@ -152,8 +130,6 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
     for (auto iter = combined_resource.begin(); iter != combined_resource.end(); iter++) {
         reducer->reduce(iter->first, iter->second);
     }
-    //    std::cout << "recieved reduce request: " << "user id: " << user_id << " num output: " << num_output << " output dir: " << output_dir << std::endl;
     reducer->impl_->close_file();
-
     return grpc::Status();
 }

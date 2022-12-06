@@ -9,10 +9,7 @@
 #include <sys/stat.h>
 
 /* CS6210_TASK: Create your data structure here for storing spec from the config file */
-struct MapReduceSpec {
-    // Fetches information from the config file which is to be passed to the Master. 
-	// Framework: setup all infra that the Master requires to do it own job.
-	// Master: Perform the map-reduce task, talk to workers and provide them work, communicate with workers. 
+struct MapReduceSpec { 
     int num_workers = 0;
     int map_kilobytes = 0;
     int num_outputs = 0;

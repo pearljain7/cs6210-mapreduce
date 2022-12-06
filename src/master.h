@@ -21,8 +21,8 @@
 
 struct RequestData {
     enum WorkType {
-        MAP,
-        REDUCE,
+        MAP = 0,
+        REDUCE = 1,
     };
 
     enum RequestStatus {
@@ -109,7 +109,6 @@ class WorkerClient {
 
             worker_metadata.status_ = WorkerData::BUSY;
             context_manager = std::make_shared<MapAsyncContextManager>();
-
             std::chrono::system_clock::time_point deadline =
                     std::chrono::system_clock::now() + std::chrono::seconds(TTL);
             context_manager->context.set_deadline(deadline);
@@ -151,14 +150,13 @@ class WorkerClient {
             GPR_ASSERT(ok);
             if (context_manager->status.ok())
             {
-                // finished result, set the status to be idle indicating ready fof another work
+                // set the status as idle indicating ready for another work on finishing current task.
                 worker_metadata.status_ = WorkerData::IDLE;
                 return true;
             } else {
                 std::cout << "RPC failed" << std::endl;
                 std::cout << context_manager->status.error_code() << ": " << context_manager->status.error_message() << std::endl;
-
-                // probabaly retry?
+                // set the status as down indicating worker did not return an appropriate response.
                 worker_metadata.status_ = WorkerData::DOWN;
                 return false;
             }
@@ -252,15 +250,7 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShards>& file
 /* CS6210_TASK: Here you go. once this function is called you will complete whole map reduce task and return true if succeeded */
 bool Master::run() {
 	/*
-		Assign tasks to workers and communicate their respective instructions (eg. userid etc).
-		This is done via gRPC using the file - masterworker.proto file.
-		You come up with a gRPC specific interface to communicate bwteen the master (client) and worker (server) 
-	*/
-	/*
-	Perform book keeping.
-	Restart process if a worker is not responding on a different node (worker). 
-	Keep track of all running mappers and reducers. 
-	Communicate between mapper results (set of intermediate files on local) and pass this info to the reduce to operate and generate the final output file.
+		Assign tasks to workers and communicate their respective instructions (eg. userid etc). 
 	*/
     std::cout << "Start map jobs.." << std::endl;
     while (!task_all_finished(map_request_status_)) {
@@ -320,7 +310,7 @@ void Master::check_reply_and_update_status(std::vector<RequestData::RequestStatu
                 reduce_requests_[reducer_id].add_intermediate_file_address(current_worker->get_map_reply().intermediate_file_location(reducer_id));
             }
         } else {
-            // worked is down or TTL of request is reached. Requeing the job.
+            // Worker is down or TTL of request is reached. Requeing the job.
             request_status[worker_job_tracker[worker_id]] = RequestData::NOT_STARTED;
             // Reconnect the worker client
             new std::thread(&Master::retest_connection, this, current_worker);
