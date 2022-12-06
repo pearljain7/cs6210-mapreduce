@@ -22,8 +22,8 @@ struct FileShard {
 /* CS6210_TASK: Create fileshards from the list of input files, map_kilobytes etc. using mr_spec you populated  */ 
 inline bool shard_files(const MapReduceSpec& mr_spec, std::vector<FileShard>& fileShards) {
   //TODO
-    int start_pos = 0, end_pos = 0, remaining = size;
-    int size = mr_spec.map_kilobytes * 1024;
+    int shard_size = mr_spec.map_kilobytes * 1024;
+    int start_pos = 0, end_pos = 0, remaining = shard_size;
     FileShard cur_shard;
     for (auto &file_path : mr_spec.input_files) {
         std::ifstream infile(file_path, std::ifstream::binary);
@@ -36,15 +36,15 @@ inline bool shard_files(const MapReduceSpec& mr_spec, std::vector<FileShard>& fi
                 cur_shard.shards.emplace_back(ShardInfo{file_path, start_pos, end_pos});
                 fileShards.emplace_back(std::move(cur_shard));
                 start_pos = end_pos;
-                // reset remaining byte to size
-                remaining = size;
+                // reset remaining byte to shard_size
+                remaining = shard_size;
             }
         }
 
         infile.close();
 
         // if we reached the end of the file and there is still stuff remaining
-        if (remaining != size) {
+        if (remaining != shard_size) {
             cur_shard.shards.emplace_back(ShardInfo{file_path, start_pos, end_pos});
         }
 
