@@ -15,5 +15,5 @@ private:
   bool run_master();
 
   MapReduceSpec mr_spec_;
-  std::vector<FileShard> file_shards_;
+  std::vector<FileShards> file_shards_;
 };

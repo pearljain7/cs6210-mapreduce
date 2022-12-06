@@ -16,143 +16,154 @@
 #include "masterworker.pb.h"
 #include "masterworker.grpc.pb.h"
 
-#define TIME_OUT 10
-#define CONNECTION_TIME_OUT 1000
+#define TTL 10
+#define CONNECTION_TTL 1000
 
-enum WorkType {
-    MAP,
-    REDUCE,
-};
+struct RequestData {
+    enum WorkType {
+        MAP,
+        REDUCE,
+    };
 
-enum RequestStatus {
-    NOT_STARTED = 0,
-    PROCESSING = 1,
-    FINISHED = 2
+    enum RequestStatus {
+        NOT_STARTED = 0,
+        PROCESSING = 1,
+        FINISHED = 2
+    };
 };
 
 struct WorkerData {
     enum WorkerStatus {
-        Busy = 1,
-        Idle = 2,
-        Down = 3,
+        BUSY = 1,
+        IDLE = 2,
+        DOWN = 3,
     };
 
-    WorkerData(std::string worker_addr, int worker_id): worker_addr_(std::move(worker_addr)),
-                                                                                status_(Idle),
+    WorkerData(std::string worker_addr, int worker_id): ip_addr_(std::move(worker_addr)),
+                                                                                status_(IDLE),
                                                                                 worker_id(worker_id)
     {}
 
-    std::string worker_addr_;
+    std::string ip_addr_;
     WorkerStatus status_;
     int worker_id;
 };
 
 
 class WorkerClient {
-public:
-    WorkerClient(WorkerData worker_data): worker_metadata(worker_data) {
-        std::cout << "master connecting to port: " << worker_data.worker_addr_ << std::endl;
-        channel = grpc::CreateChannel(worker_data.worker_addr_, grpc::InsecureChannelCredentials());
-        stub_ = masterworker::WorkerService::NewStub(channel);
-    }
 
-    void set_worker_status(WorkerData::WorkerStatus status) { worker_metadata.status_ = status; }
-    WorkerData::WorkerStatus get_worker_status() { return worker_metadata.status_; }
-    int get_worker_id() { return worker_metadata.worker_id; }
+    public:
+        std::shared_ptr<grpc::Channel> channel;
 
-    masterworker::MapReply get_map_reply() {
-        return std::static_pointer_cast<MapAsyncContextManager>(context_manager)->reply;
-    }
+    private:
+        struct AsyncContextManager {
+            grpc::ClientContext context;
+            grpc::CompletionQueue cq;
+            grpc::Status status;
+        };
 
-    void SendMapRequestToWorker(const masterworker::MapRequest &request) {
-        if (worker_metadata.status_ != WorkerData::Idle) {
-            std::cerr << "Sending request to idle worker is not recommended. Current status is: " << worker_metadata.status_ << std::endl;
-            throw 1;
+        struct MapAsyncContextManager: AsyncContextManager {
+            masterworker::MapReply reply;
+            std::unique_ptr<grpc::ClientAsyncResponseReader<masterworker::MapReply>> rpc;
+        };
+
+        struct ReduceAsyncContextManager: AsyncContextManager {
+            masterworker::ReduceReply reply;
+            std::unique_ptr<grpc::ClientAsyncResponseReader<masterworker::ReduceReply>> rpc;
+        };
+
+        std::unique_ptr<masterworker::WorkerService::Stub> stub_;
+        std::shared_ptr<AsyncContextManager> context_manager;
+        WorkerData worker_metadata;
+
+    public:
+        WorkerClient(WorkerData worker_data): worker_metadata(worker_data) {
+            std::cout << "Master connecting to port: " << worker_data.ip_addr_ << std::endl;
+            channel = grpc::CreateChannel(worker_data.ip_addr_, grpc::InsecureChannelCredentials());
+            stub_ = masterworker::WorkerService::NewStub(channel);
         }
 
-        std::cout << "Sending Request: " << request.shard_id() << " for mapping to Worker: " << worker_metadata.worker_id << std::endl;
-
-        worker_metadata.status_ = WorkerData::Busy;
-        context_manager = std::make_shared<MapAsyncContextManager>();
-
-        std::chrono::system_clock::time_point deadline =
-                std::chrono::system_clock::now() + std::chrono::seconds(TIME_OUT);
-        context_manager->context.set_deadline(deadline);
-
-        std::shared_ptr<MapAsyncContextManager> map_context = std::static_pointer_cast<MapAsyncContextManager>(context_manager);
-        map_context->rpc = stub_->PrepareAsyncRegisterMapService(&context_manager->context, request, &context_manager->cq);
-        map_context->rpc->StartCall();
-        map_context->rpc->Finish(&map_context->reply, &context_manager->status, (void*) 1);
-    }
-
-    void SendReduceRequestToWorker(const masterworker::ReduceRequest &request) {
-        if (worker_metadata.status_ != WorkerData::Idle) {
-            std::cerr << "Sending request to idle worker is not recommended." << std::endl;
-            throw 1;
+        void set_worker_status(WorkerData::WorkerStatus status) { 
+            worker_metadata.status_ = status; 
         }
 
-        std::cout << "Sending Request: " << request.reducer_id() << " for reducer to Worker: " << worker_metadata.worker_id << std::endl;
-
-        worker_metadata.status_ = WorkerData::Busy;
-        context_manager = std::make_shared<ReduceAsyncContextManager>();
-
-        std::chrono::system_clock::time_point deadline =
-                std::chrono::system_clock::now() + std::chrono::seconds(TIME_OUT);
-        context_manager->context.set_deadline(deadline);
-
-        std::shared_ptr<ReduceAsyncContextManager> reduce_context = std::static_pointer_cast<ReduceAsyncContextManager>(context_manager);
-        reduce_context->rpc = stub_->PrepareAsyncRegisterReduceService(&context_manager->context, request, &context_manager->cq);
-        reduce_context->rpc->StartCall();
-        reduce_context->rpc->Finish(&reduce_context->reply, &context_manager->status, (void*) 1);
-    }
-
-    bool check_status() {
-        std::cout << "Checking Status" << std::endl;
-        void* got_tag;
-        bool ok = false;
-        std::chrono::system_clock::time_point delay = std::chrono::system_clock::now() + std::chrono::seconds(TIME_OUT);
-        GPR_ASSERT(context_manager->cq.Next(&got_tag, &ok));
-        GPR_ASSERT(got_tag == (void*)1);
-        GPR_ASSERT(ok);
-        if (context_manager->status.ok())
-        {
-            // finished result, set the status to be idle indicating ready fof another work
-            worker_metadata.status_ = WorkerData::Idle;
-            return true;
-        } else {
-            std::cout << "RPC failed" << std::endl;
-            std::cout << context_manager->status.error_code() << ": " << context_manager->status.error_message() << std::endl;
-
-            // probabaly retry?
-            worker_metadata.status_ = WorkerData::Down;
-            return false;
+        WorkerData::WorkerStatus get_worker_status() { 
+            return worker_metadata.status_; 
         }
 
-    }
+        int get_worker_id() { 
+            return worker_metadata.worker_id; 
+        }
 
-public:
-    std::shared_ptr<grpc::Channel> channel;
-private:
-    struct AsyncContextManager {
-        grpc::ClientContext context;
-        grpc::CompletionQueue cq;
-        grpc::Status status;
-    };
+        masterworker::MapReply get_map_reply() {
+            return std::static_pointer_cast<MapAsyncContextManager>(context_manager)->reply;
+        }
 
-    struct MapAsyncContextManager: AsyncContextManager {
-        masterworker::MapReply reply;
-        std::unique_ptr<grpc::ClientAsyncResponseReader<masterworker::MapReply>> rpc;
-    };
+        void SendMapRequestToWorker(const masterworker::MapRequest &request) {
+            if (worker_metadata.status_ != WorkerData::IDLE) {
+                std::cerr << "Sending request to idle worker is not recommended. Current status is: " << worker_metadata.status_ << std::endl;
+                throw 1;
+            }
 
-    struct ReduceAsyncContextManager: AsyncContextManager {
-        masterworker::ReduceReply reply;
-        std::unique_ptr<grpc::ClientAsyncResponseReader<masterworker::ReduceReply>> rpc;
-    };
-private:
-    std::unique_ptr<masterworker::WorkerService::Stub> stub_;
+            std::cout << "Sending Request: " << request.shard_id() << " for mapping to Worker: " << worker_metadata.worker_id << std::endl;
 
-    std::shared_ptr<AsyncContextManager> context_manager;
-    WorkerData worker_metadata;
+            worker_metadata.status_ = WorkerData::BUSY;
+            context_manager = std::make_shared<MapAsyncContextManager>();
+
+            std::chrono::system_clock::time_point deadline =
+                    std::chrono::system_clock::now() + std::chrono::seconds(TTL);
+            context_manager->context.set_deadline(deadline);
+
+            std::shared_ptr<MapAsyncContextManager> map_context = std::static_pointer_cast<MapAsyncContextManager>(context_manager);
+            map_context->rpc = stub_->PrepareAsyncRegisterMapService(&context_manager->context, request, &context_manager->cq);
+            map_context->rpc->StartCall();
+            map_context->rpc->Finish(&map_context->reply, &context_manager->status, (void*) 1);
+        }
+
+        void SendReduceRequestToWorker(const masterworker::ReduceRequest &request) {
+            if (worker_metadata.status_ != WorkerData::IDLE) {
+                std::cerr << "Sending request to idle worker is not recommended." << std::endl;
+                throw 1;
+            }
+
+            std::cout << "Sending Request: " << request.reducer_id() << " for reducer to Worker: " << worker_metadata.worker_id << std::endl;
+
+            worker_metadata.status_ = WorkerData::BUSY;
+            context_manager = std::make_shared<ReduceAsyncContextManager>();
+
+            std::chrono::system_clock::time_point deadline =
+                    std::chrono::system_clock::now() + std::chrono::seconds(TTL);
+            context_manager->context.set_deadline(deadline);
+
+            std::shared_ptr<ReduceAsyncContextManager> reduce_context = std::static_pointer_cast<ReduceAsyncContextManager>(context_manager);
+            reduce_context->rpc = stub_->PrepareAsyncRegisterReduceService(&context_manager->context, request, &context_manager->cq);
+            reduce_context->rpc->StartCall();
+            reduce_context->rpc->Finish(&reduce_context->reply, &context_manager->status, (void*) 1);
+        }
+
+        bool check_status() {
+            std::cout << "Checking Status" << std::endl;
+            void* got_tag;
+            bool ok = false;
+            std::chrono::system_clock::time_point delay = std::chrono::system_clock::now() + std::chrono::seconds(TTL);
+            GPR_ASSERT(context_manager->cq.Next(&got_tag, &ok));
+            GPR_ASSERT(got_tag == (void*)1);
+            GPR_ASSERT(ok);
+            if (context_manager->status.ok())
+            {
+                // finished result, set the status to be idle indicating ready fof another work
+                worker_metadata.status_ = WorkerData::IDLE;
+                return true;
+            } else {
+                std::cout << "RPC failed" << std::endl;
+                std::cout << context_manager->status.error_code() << ": " << context_manager->status.error_message() << std::endl;
+
+                // probabaly retry?
+                worker_metadata.status_ = WorkerData::DOWN;
+                return false;
+            }
+
+        }
 };
 
 
@@ -161,35 +172,34 @@ private:
 class Master {
 
 	public:
-		/* DON'T change the function signature of this constructor */
-		Master(const MapReduceSpec&, const std::vector<FileShard>&);
-    // Make sure to send all info via MapReduceSpec struct to the Master
+		/* DON'T change the function signature of this constructor. Send all info via MapReduceSpec struct to the Master in this constructor.*/
+		Master(const MapReduceSpec&, const std::vector<FileShards>&);
+
 		/* DON'T change this function's signature */
 		bool run();
 
-		bool task_all_finished(const std::vector<RequestStatus>& status) {
+		bool task_all_finished(const std::vector<RequestData::RequestStatus>& status) {
 		    for (auto stats : status) {
-		        if (stats != FINISHED) return false;
+		        if (stats != RequestData::FINISHED) return false;
 		    }
             return true;
 		}
 
     private:
       
-	    void assign_available_worker_to_jobs(WorkType work_type);
+	    void assign_available_worker_to_jobs(RequestData::WorkType work_type);
 
-
-		void check_reply_and_update_status(std::vector<RequestStatus>& request_status,WorkType work_type);
+		void check_reply_and_update_status(std::vector<RequestData::RequestStatus>& request_status, RequestData::WorkType work_type);
 
         void retest_connection(WorkerClient* worker);
 
 	private:
 		/* NOW you can add below, data members and member functions as per the need of your implementation*/
 		std::vector<masterworker::MapRequest> map_requests_;
-		std::vector<RequestStatus> map_request_status_;
+		std::vector<RequestData::RequestStatus> map_request_status_;
 
 		std::vector<masterworker::ReduceRequest> reduce_requests_;
-        std::vector<RequestStatus> reduce_request_status_;
+        std::vector<RequestData::RequestStatus> reduce_request_status_;
 
         std::queue<WorkerClient*> active_clients;
 
@@ -201,7 +211,7 @@ class Master {
 
 /* CS6210_TASK: This is all the information your master will get from the framework.
 	You can populate your other class data members here if you want */
-Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_shards) {
+Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShards>& file_shards) {
     //TODO
     for (int worker_id = 0; worker_id < mr_spec.num_workers; worker_id++) {
         WorkerData cur_data = WorkerData(mr_spec.worker_ipaddr[worker_id], worker_id);
@@ -222,7 +232,7 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
             new_shard_info->set_end_offset(shard_info.end_offset);
         }
         map_requests_.emplace_back(new_request);
-        map_request_status_.emplace_back(NOT_STARTED);
+        map_request_status_.emplace_back(RequestData::NOT_STARTED);
     }
 
     // populate Reduce Requests
@@ -233,7 +243,7 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
         new_reduce_request.set_reducer_id(reduce_id);
 
         reduce_requests_.emplace_back(new_reduce_request);
-        reduce_request_status_.emplace_back(NOT_STARTED);
+        reduce_request_status_.emplace_back(RequestData::NOT_STARTED);
     }
 }
 
@@ -241,7 +251,6 @@ Master::Master(const MapReduceSpec& mr_spec, const std::vector<FileShard>& file_
 
 /* CS6210_TASK: Here you go. once this function is called you will complete whole map reduce task and return true if succeeded */
 bool Master::run() {
-  // TODO.
 	/*
 		Assign tasks to workers and communicate their respective instructions (eg. userid etc).
 		This is done via gRPC using the file - masterworker.proto file.
@@ -252,36 +261,34 @@ bool Master::run() {
 	Restart process if a worker is not responding on a different node (worker). 
 	Keep track of all running mappers and reducers. 
 	Communicate between mapper results (set of intermediate files on local) and pass this info to the reduce to operate and generate the final output file.
-	
 	*/
+    std::cout << "Start map jobs.." << std::endl;
     while (!task_all_finished(map_request_status_)) {
-        assign_available_worker_to_jobs(MAP);
-
-        check_reply_and_update_status(map_request_status_, MAP);
+        assign_available_worker_to_jobs(RequestData::MAP);
+        check_reply_and_update_status(map_request_status_, RequestData::MAP);
     }
 
-    std::cout << "start reduce job.." << std::endl;
-    // map is finished, try to start reduce task
+    std::cout << "Start reduce jobs.." << std::endl;
     while (!task_all_finished(reduce_request_status_)) {
-        assign_available_worker_to_jobs(REDUCE);
-        check_reply_and_update_status(reduce_request_status_, REDUCE);
+        assign_available_worker_to_jobs(RequestData::REDUCE);
+        check_reply_and_update_status(reduce_request_status_, RequestData::REDUCE);
     }
 
 	return true;
 }
 
-//template<class REQUEST_TYPE, class RESPONSE_TYPE>
-void Master::assign_available_worker_to_jobs(WorkType work_type) {
+void Master::assign_available_worker_to_jobs(RequestData::WorkType work_type) {
     for (auto& worker_client : worker_clients_) {
-        if (worker_client.get_worker_status() != WorkerData::Idle) continue;
+        if (worker_client.get_worker_status() != WorkerData::IDLE) 
+            continue;
 
-        auto &request_status = work_type == MAP? map_request_status_ : reduce_request_status_;
+        auto &request_status = work_type == RequestData::MAP ? map_request_status_ : reduce_request_status_;
 
         for (int request_id = 0; request_id < request_status.size(); request_id++) {
-            if (request_status[request_id] == NOT_STARTED) {
-                request_status[request_id] = PROCESSING;
+            if (request_status[request_id] == RequestData::NOT_STARTED) {
+                request_status[request_id] = RequestData::PROCESSING;
                 worker_job_tracker[worker_client.get_worker_id()] = request_id;
-                if (work_type == MAP)
+                if (work_type == RequestData::MAP)
                     worker_client.SendMapRequestToWorker(map_requests_[request_id]);
                 else
                     worker_client.SendReduceRequestToWorker(reduce_requests_[request_id]);
@@ -290,11 +297,10 @@ void Master::assign_available_worker_to_jobs(WorkType work_type) {
                 break;
             }
         }
-
     }
 }
 
-void Master::check_reply_and_update_status(std::vector<RequestStatus>& request_status, WorkType work_type) {
+void Master::check_reply_and_update_status(std::vector<RequestData::RequestStatus>& request_status, RequestData::WorkType work_type) {
     while (!active_clients.empty()) {
         WorkerClient* current_worker = active_clients.front();
         active_clients.pop();
@@ -303,20 +309,20 @@ void Master::check_reply_and_update_status(std::vector<RequestStatus>& request_s
         int worker_id = current_worker->get_worker_id();
 
         if (done) {
-            std::cout << "setting request status to finished: " << std::to_string(worker_job_tracker[worker_id]) << std::endl;
-            request_status[worker_job_tracker[worker_id]] = FINISHED;
-            std::cout << "finished setting request status" << std::endl;
-            if (work_type == REDUCE) return;
+            std::cout << "Request is complete " << std::to_string(worker_job_tracker[worker_id]) << std::endl;
+            request_status[worker_job_tracker[worker_id]] = RequestData::FINISHED;
+            
+            if (work_type == RequestData::REDUCE) 
+                return;
 
-            // if we are doing map job, populate the intermediate file address filed
+            // Populate intermediate output in files for the map job.
             for (int reducer_id = 0; reducer_id < reduce_requests_.size(); reducer_id++) {
                 reduce_requests_[reducer_id].add_intermediate_file_address(current_worker->get_map_reply().intermediate_file_location(reducer_id));
             }
         } else {
-            // the worker is down, requeue the job
-            request_status[worker_job_tracker[worker_id]] = NOT_STARTED;
-
-            // spawn a new thread to try to reconnect to the worker client
+            // worked is down or TTL of request is reached. Requeing the job.
+            request_status[worker_job_tracker[worker_id]] = RequestData::NOT_STARTED;
+            // Reconnect the worker client
             new std::thread(&Master::retest_connection, this, current_worker);
         }
     }
@@ -324,7 +330,7 @@ void Master::check_reply_and_update_status(std::vector<RequestStatus>& request_s
 
 void Master::retest_connection(WorkerClient* worker) {
     std::cout << "Resetting connections" << std::endl;
-    while (!worker->channel->WaitForConnected(std::chrono::system_clock::now() + std::chrono::seconds(CONNECTION_TIME_OUT))) {}
-    worker->set_worker_status(WorkerData::Idle);
-//    std::cout << "worker: " << worker->get_worker_id() << "is up again" << std::endl;
+    while (!worker->channel->WaitForConnected(std::chrono::system_clock::now() + std::chrono::seconds(CONNECTION_TTL)));
+    worker->set_worker_status(WorkerData::IDLE);
+   std::cout << "Worker: " << worker->get_worker_id() << " is open to take requests." << std::endl;
 }

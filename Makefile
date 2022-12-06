@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles /aos/projects/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

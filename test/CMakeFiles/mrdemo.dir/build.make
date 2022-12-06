@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # Include any dependencies generated for this target.
 include test/CMakeFiles/mrdemo.dir/depend.make
@@ -59,16 +59,16 @@ include test/CMakeFiles/mrdemo.dir/flags.make
 
 test/CMakeFiles/mrdemo.dir/main.cc.o: test/CMakeFiles/mrdemo.dir/flags.make
 test/CMakeFiles/mrdemo.dir/main.cc.o: test/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/mrdemo.dir/main.cc.o"
-	cd /aos/projects/test && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mrdemo.dir/main.cc.o -c /aos/projects/test/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/mrdemo.dir/main.cc.o"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mrdemo.dir/main.cc.o -c /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/main.cc
 
 test/CMakeFiles/mrdemo.dir/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mrdemo.dir/main.cc.i"
-	cd /aos/projects/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /aos/projects/test/main.cc > CMakeFiles/mrdemo.dir/main.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/main.cc > CMakeFiles/mrdemo.dir/main.cc.i
 
 test/CMakeFiles/mrdemo.dir/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mrdemo.dir/main.cc.s"
-	cd /aos/projects/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /aos/projects/test/main.cc -o CMakeFiles/mrdemo.dir/main.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/main.cc -o CMakeFiles/mrdemo.dir/main.cc.s
 
 # Object files for target mrdemo
 mrdemo_OBJECTS = \
@@ -81,51 +81,67 @@ bin/mrdemo: test/CMakeFiles/mrdemo.dir/main.cc.o
 bin/mrdemo: test/CMakeFiles/mrdemo.dir/build.make
 bin/mrdemo: src/libmapreducelib.a
 bin/mrdemo: src/libp4protolib.a
-bin/mrdemo: /usr/local/lib/libgrpc++.a
-bin/mrdemo: /usr/local/lib/libprotobuf.a
-bin/mrdemo: /usr/local/lib/libgrpc.a
-bin/mrdemo: /usr/local/lib/libssl.a
-bin/mrdemo: /usr/local/lib/libcrypto.a
-bin/mrdemo: /usr/local/lib/libz.a
-bin/mrdemo: /usr/local/lib/libcares.a
-bin/mrdemo: /usr/local/lib/libre2.a
-bin/mrdemo: /usr/local/lib/libabsl_statusor.a
-bin/mrdemo: /usr/local/lib/libabsl_hash.a
-bin/mrdemo: /usr/local/lib/libabsl_bad_variant_access.a
-bin/mrdemo: /usr/local/lib/libabsl_city.a
-bin/mrdemo: /usr/local/lib/libabsl_raw_hash_set.a
-bin/mrdemo: /usr/local/lib/libabsl_hashtablez_sampler.a
-bin/mrdemo: /usr/local/lib/libabsl_exponential_biased.a
-bin/mrdemo: /usr/local/lib/libgpr.a
-bin/mrdemo: /usr/local/lib/libabsl_status.a
-bin/mrdemo: /usr/local/lib/libabsl_cord.a
-bin/mrdemo: /usr/local/lib/libabsl_bad_optional_access.a
-bin/mrdemo: /usr/local/lib/libabsl_synchronization.a
-bin/mrdemo: /usr/local/lib/libabsl_stacktrace.a
-bin/mrdemo: /usr/local/lib/libabsl_symbolize.a
-bin/mrdemo: /usr/local/lib/libabsl_debugging_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_demangle_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_graphcycles_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_time.a
-bin/mrdemo: /usr/local/lib/libabsl_civil_time.a
-bin/mrdemo: /usr/local/lib/libabsl_time_zone.a
-bin/mrdemo: /usr/local/lib/libabsl_malloc_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_str_format_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_strings.a
-bin/mrdemo: /usr/local/lib/libabsl_strings_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_int128.a
-bin/mrdemo: /usr/local/lib/libabsl_throw_delegate.a
-bin/mrdemo: /usr/local/lib/libabsl_base.a
-bin/mrdemo: /usr/local/lib/libabsl_raw_logging_internal.a
-bin/mrdemo: /usr/local/lib/libabsl_log_severity.a
-bin/mrdemo: /usr/local/lib/libabsl_spinlock_wait.a
-bin/mrdemo: /usr/local/lib/libaddress_sorting.a
-bin/mrdemo: /usr/local/lib/libupb.a
+bin/mrdemo: /lib/libgrpc++.a
+bin/mrdemo: /usr/lib/libprotobuf.a
+bin/mrdemo: /lib/libgrpc.a
+bin/mrdemo: /lib/libz.a
+bin/mrdemo: /lib/libcares.a
+bin/mrdemo: /lib/libaddress_sorting.a
+bin/mrdemo: /lib/libre2.a
+bin/mrdemo: /lib/libupb.a
+bin/mrdemo: /lib/libabsl_raw_hash_set.a
+bin/mrdemo: /lib/libabsl_hashtablez_sampler.a
+bin/mrdemo: /lib/libabsl_hash.a
+bin/mrdemo: /lib/libabsl_city.a
+bin/mrdemo: /lib/libabsl_low_level_hash.a
+bin/mrdemo: /lib/libabsl_statusor.a
+bin/mrdemo: /lib/libgpr.a
+bin/mrdemo: /lib/libabsl_bad_variant_access.a
+bin/mrdemo: /lib/libabsl_status.a
+bin/mrdemo: /lib/libabsl_strerror.a
+bin/mrdemo: /lib/libabsl_random_distributions.a
+bin/mrdemo: /lib/libabsl_random_seed_sequences.a
+bin/mrdemo: /lib/libabsl_random_internal_pool_urbg.a
+bin/mrdemo: /lib/libabsl_random_internal_randen.a
+bin/mrdemo: /lib/libabsl_random_internal_randen_hwaes.a
+bin/mrdemo: /lib/libabsl_random_internal_randen_hwaes_impl.a
+bin/mrdemo: /lib/libabsl_random_internal_randen_slow.a
+bin/mrdemo: /lib/libabsl_random_internal_platform.a
+bin/mrdemo: /lib/libabsl_random_internal_seed_material.a
+bin/mrdemo: /lib/libabsl_random_seed_gen_exception.a
+bin/mrdemo: /lib/libabsl_cord.a
+bin/mrdemo: /lib/libabsl_bad_optional_access.a
+bin/mrdemo: /lib/libabsl_cordz_info.a
+bin/mrdemo: /lib/libabsl_cord_internal.a
+bin/mrdemo: /lib/libabsl_cordz_functions.a
+bin/mrdemo: /lib/libabsl_exponential_biased.a
+bin/mrdemo: /lib/libabsl_cordz_handle.a
+bin/mrdemo: /lib/libabsl_str_format_internal.a
+bin/mrdemo: /lib/libabsl_synchronization.a
+bin/mrdemo: /lib/libabsl_stacktrace.a
+bin/mrdemo: /lib/libabsl_symbolize.a
+bin/mrdemo: /lib/libabsl_debugging_internal.a
+bin/mrdemo: /lib/libabsl_demangle_internal.a
+bin/mrdemo: /lib/libabsl_graphcycles_internal.a
+bin/mrdemo: /lib/libabsl_malloc_internal.a
+bin/mrdemo: /lib/libabsl_time.a
+bin/mrdemo: /lib/libabsl_strings.a
+bin/mrdemo: /lib/libabsl_throw_delegate.a
+bin/mrdemo: /lib/libabsl_int128.a
+bin/mrdemo: /lib/libabsl_strings_internal.a
+bin/mrdemo: /lib/libabsl_base.a
+bin/mrdemo: /lib/libabsl_spinlock_wait.a
+bin/mrdemo: /lib/libabsl_raw_logging_internal.a
+bin/mrdemo: /lib/libabsl_log_severity.a
+bin/mrdemo: /lib/libabsl_civil_time.a
+bin/mrdemo: /lib/libabsl_time_zone.a
+bin/mrdemo: /lib/libssl.a
+bin/mrdemo: /lib/libcrypto.a
 bin/mrdemo: test/CMakeFiles/mrdemo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/mrdemo"
-	cd /aos/projects/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mrdemo.dir/link.txt --verbose=$(VERBOSE)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "symbolic link /aos/projects/bin/config.ini created."
-	cd /aos/projects/test && /usr/bin/cmake -E create_symlink /aos/projects/test/config.ini /aos/projects/bin/config.ini
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/mrdemo"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mrdemo.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "symbolic link /home/sarah/Documents/AOS/project4/cs6210-mapreduce/bin/config.ini created."
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test && /usr/bin/cmake -E create_symlink /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/config.ini /home/sarah/Documents/AOS/project4/cs6210-mapreduce/bin/config.ini
 
 # Rule to build all files generated by this target.
 test/CMakeFiles/mrdemo.dir/build: bin/mrdemo
@@ -133,10 +149,10 @@ test/CMakeFiles/mrdemo.dir/build: bin/mrdemo
 .PHONY : test/CMakeFiles/mrdemo.dir/build
 
 test/CMakeFiles/mrdemo.dir/clean:
-	cd /aos/projects/test && $(CMAKE_COMMAND) -P CMakeFiles/mrdemo.dir/cmake_clean.cmake
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test && $(CMAKE_COMMAND) -P CMakeFiles/mrdemo.dir/cmake_clean.cmake
 .PHONY : test/CMakeFiles/mrdemo.dir/clean
 
 test/CMakeFiles/mrdemo.dir/depend:
-	cd /aos/projects && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /aos/projects /aos/projects/test /aos/projects /aos/projects/test /aos/projects/test/CMakeFiles/mrdemo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sarah/Documents/AOS/project4/cs6210-mapreduce /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test /home/sarah/Documents/AOS/project4/cs6210-mapreduce /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/CMakeFiles/mrdemo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : test/CMakeFiles/mrdemo.dir/depend
 

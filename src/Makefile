@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +126,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /aos/projects && $(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles /aos/projects/src/CMakeFiles/progress.marks
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/CMakeFiles/progress.marks
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /aos/projects && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/mr_workerlib.dir/rule:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mr_workerlib.dir/rule
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mr_workerlib.dir/rule
 .PHONY : src/CMakeFiles/mr_workerlib.dir/rule
 
 # Convenience name for target.
@@ -168,12 +168,12 @@ mr_workerlib: src/CMakeFiles/mr_workerlib.dir/rule
 
 # fast build rule for target.
 mr_workerlib/fast:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/build
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/build
 .PHONY : mr_workerlib/fast
 
 # Convenience name for target.
 src/CMakeFiles/mapreducelib.dir/rule:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mapreducelib.dir/rule
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mapreducelib.dir/rule
 .PHONY : src/CMakeFiles/mapreducelib.dir/rule
 
 # Convenience name for target.
@@ -183,12 +183,12 @@ mapreducelib: src/CMakeFiles/mapreducelib.dir/rule
 
 # fast build rule for target.
 mapreducelib/fast:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/build
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/build
 .PHONY : mapreducelib/fast
 
 # Convenience name for target.
 src/CMakeFiles/p4protolib.dir/rule:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/p4protolib.dir/rule
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/p4protolib.dir/rule
 .PHONY : src/CMakeFiles/p4protolib.dir/rule
 
 # Convenience name for target.
@@ -198,7 +198,7 @@ p4protolib: src/CMakeFiles/p4protolib.dir/rule
 
 # fast build rule for target.
 p4protolib/fast:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/build
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/build
 .PHONY : p4protolib/fast
 
 mapreduce.o: mapreduce.cc.o
@@ -207,7 +207,7 @@ mapreduce.o: mapreduce.cc.o
 
 # target to build an object file
 mapreduce.cc.o:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o
 .PHONY : mapreduce.cc.o
 
 mapreduce.i: mapreduce.cc.i
@@ -216,7 +216,7 @@ mapreduce.i: mapreduce.cc.i
 
 # target to preprocess a source file
 mapreduce.cc.i:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce.cc.i
 .PHONY : mapreduce.cc.i
 
 mapreduce.s: mapreduce.cc.s
@@ -225,7 +225,7 @@ mapreduce.s: mapreduce.cc.s
 
 # target to generate assembly for a file
 mapreduce.cc.s:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce.cc.s
 .PHONY : mapreduce.cc.s
 
 mapreduce_impl.o: mapreduce_impl.cc.o
@@ -234,7 +234,7 @@ mapreduce_impl.o: mapreduce_impl.cc.o
 
 # target to build an object file
 mapreduce_impl.cc.o:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o
 .PHONY : mapreduce_impl.cc.o
 
 mapreduce_impl.i: mapreduce_impl.cc.i
@@ -243,7 +243,7 @@ mapreduce_impl.i: mapreduce_impl.cc.i
 
 # target to preprocess a source file
 mapreduce_impl.cc.i:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.i
 .PHONY : mapreduce_impl.cc.i
 
 mapreduce_impl.s: mapreduce_impl.cc.s
@@ -252,7 +252,7 @@ mapreduce_impl.s: mapreduce_impl.cc.s
 
 # target to generate assembly for a file
 mapreduce_impl.cc.s:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s
 .PHONY : mapreduce_impl.cc.s
 
 masterworker.grpc.pb.o: masterworker.grpc.pb.cc.o
@@ -261,7 +261,7 @@ masterworker.grpc.pb.o: masterworker.grpc.pb.cc.o
 
 # target to build an object file
 masterworker.grpc.pb.cc.o:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.o
 .PHONY : masterworker.grpc.pb.cc.o
 
 masterworker.grpc.pb.i: masterworker.grpc.pb.cc.i
@@ -270,7 +270,7 @@ masterworker.grpc.pb.i: masterworker.grpc.pb.cc.i
 
 # target to preprocess a source file
 masterworker.grpc.pb.cc.i:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.i
 .PHONY : masterworker.grpc.pb.cc.i
 
 masterworker.grpc.pb.s: masterworker.grpc.pb.cc.s
@@ -279,7 +279,7 @@ masterworker.grpc.pb.s: masterworker.grpc.pb.cc.s
 
 # target to generate assembly for a file
 masterworker.grpc.pb.cc.s:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.grpc.pb.cc.s
 .PHONY : masterworker.grpc.pb.cc.s
 
 masterworker.pb.o: masterworker.pb.cc.o
@@ -288,7 +288,7 @@ masterworker.pb.o: masterworker.pb.cc.o
 
 # target to build an object file
 masterworker.pb.cc.o:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.o
 .PHONY : masterworker.pb.cc.o
 
 masterworker.pb.i: masterworker.pb.cc.i
@@ -297,7 +297,7 @@ masterworker.pb.i: masterworker.pb.cc.i
 
 # target to preprocess a source file
 masterworker.pb.cc.i:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.i
 .PHONY : masterworker.pb.cc.i
 
 masterworker.pb.s: masterworker.pb.cc.s
@@ -306,7 +306,7 @@ masterworker.pb.s: masterworker.pb.cc.s
 
 # target to generate assembly for a file
 masterworker.pb.cc.s:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/masterworker.pb.cc.s
 .PHONY : masterworker.pb.cc.s
 
 mr_task_factory.o: mr_task_factory.cc.o
@@ -315,7 +315,7 @@ mr_task_factory.o: mr_task_factory.cc.o
 
 # target to build an object file
 mr_task_factory.cc.o:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o
 .PHONY : mr_task_factory.cc.o
 
 mr_task_factory.i: mr_task_factory.cc.i
@@ -324,7 +324,7 @@ mr_task_factory.i: mr_task_factory.cc.i
 
 # target to preprocess a source file
 mr_task_factory.cc.i:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.i
 .PHONY : mr_task_factory.cc.i
 
 mr_task_factory.s: mr_task_factory.cc.s
@@ -333,7 +333,7 @@ mr_task_factory.s: mr_task_factory.cc.s
 
 # target to generate assembly for a file
 mr_task_factory.cc.s:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.s
 .PHONY : mr_task_factory.cc.s
 
 run_worker.o: run_worker.cc.o
@@ -342,7 +342,7 @@ run_worker.o: run_worker.cc.o
 
 # target to build an object file
 run_worker.cc.o:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o
 .PHONY : run_worker.cc.o
 
 run_worker.i: run_worker.cc.i
@@ -351,7 +351,7 @@ run_worker.i: run_worker.cc.i
 
 # target to preprocess a source file
 run_worker.cc.i:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.i
 .PHONY : run_worker.cc.i
 
 run_worker.s: run_worker.cc.s
@@ -360,7 +360,7 @@ run_worker.s: run_worker.cc.s
 
 # target to generate assembly for a file
 run_worker.cc.s:
-	cd /aos/projects && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/run_worker.cc.s
 .PHONY : run_worker.cc.s
 
 # Help Target
@@ -407,6 +407,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /aos/projects && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

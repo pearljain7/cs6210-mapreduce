@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/aos/projects/test/main.cc
+/home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/main.cc
 iostream
 -
 cstdlib

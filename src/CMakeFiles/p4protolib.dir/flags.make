@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = -DCARES_STATICLIB
 
-CXX_INCLUDES = -I/aos/projects/src 
+CXX_INCLUDES = -I/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src -isystem /include 
 

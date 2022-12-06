@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +126,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /aos/projects && $(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles /aos/projects/test/CMakeFiles/progress.marks
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/CMakeFiles/progress.marks
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 test/clean
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 test/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /aos/projects && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 test/CMakeFiles/mr_worker.dir/rule:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mr_worker.dir/rule
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mr_worker.dir/rule
 .PHONY : test/CMakeFiles/mr_worker.dir/rule
 
 # Convenience name for target.
@@ -168,12 +168,12 @@ mr_worker: test/CMakeFiles/mr_worker.dir/rule
 
 # fast build rule for target.
 mr_worker/fast:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/build
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/build
 .PHONY : mr_worker/fast
 
 # Convenience name for target.
 test/CMakeFiles/mrdemo.dir/rule:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mrdemo.dir/rule
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mrdemo.dir/rule
 .PHONY : test/CMakeFiles/mrdemo.dir/rule
 
 # Convenience name for target.
@@ -183,7 +183,7 @@ mrdemo: test/CMakeFiles/mrdemo.dir/rule
 
 # fast build rule for target.
 mrdemo/fast:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/build
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/build
 .PHONY : mrdemo/fast
 
 main.o: main.cc.o
@@ -192,7 +192,7 @@ main.o: main.cc.o
 
 # target to build an object file
 main.cc.o:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/main.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/main.cc.o
 .PHONY : main.cc.o
 
 main.i: main.cc.i
@@ -201,7 +201,7 @@ main.i: main.cc.i
 
 # target to preprocess a source file
 main.cc.i:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/main.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/main.cc.i
 .PHONY : main.cc.i
 
 main.s: main.cc.s
@@ -210,7 +210,7 @@ main.s: main.cc.s
 
 # target to generate assembly for a file
 main.cc.s:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/main.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/main.cc.s
 .PHONY : main.cc.s
 
 user_tasks.o: user_tasks.cc.o
@@ -219,7 +219,7 @@ user_tasks.o: user_tasks.cc.o
 
 # target to build an object file
 user_tasks.cc.o:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/user_tasks.cc.o
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/user_tasks.cc.o
 .PHONY : user_tasks.cc.o
 
 user_tasks.i: user_tasks.cc.i
@@ -228,7 +228,7 @@ user_tasks.i: user_tasks.cc.i
 
 # target to preprocess a source file
 user_tasks.cc.i:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/user_tasks.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/user_tasks.cc.i
 .PHONY : user_tasks.cc.i
 
 user_tasks.s: user_tasks.cc.s
@@ -237,7 +237,7 @@ user_tasks.s: user_tasks.cc.s
 
 # target to generate assembly for a file
 user_tasks.cc.s:
-	cd /aos/projects && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/user_tasks.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/user_tasks.cc.s
 .PHONY : user_tasks.cc.s
 
 # Help Target
@@ -271,6 +271,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /aos/projects && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

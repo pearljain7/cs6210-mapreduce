@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -158,14 +158,14 @@ test/clean: test/CMakeFiles/mrdemo.dir/clean
 src/CMakeFiles/mr_workerlib.dir/all: src/CMakeFiles/p4protolib.dir/all
 	$(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/depend
 	$(MAKE) -f src/CMakeFiles/mr_workerlib.dir/build.make src/CMakeFiles/mr_workerlib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/aos/projects/CMakeFiles --progress-num=6,7,8 "Built target mr_workerlib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=6,7,8 "Built target mr_workerlib"
 .PHONY : src/CMakeFiles/mr_workerlib.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/mr_workerlib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mr_workerlib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : src/CMakeFiles/mr_workerlib.dir/rule
 
 # Convenience name for target.
@@ -185,14 +185,14 @@ src/CMakeFiles/mr_workerlib.dir/clean:
 src/CMakeFiles/mapreducelib.dir/all: src/CMakeFiles/p4protolib.dir/all
 	$(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/depend
 	$(MAKE) -f src/CMakeFiles/mapreducelib.dir/build.make src/CMakeFiles/mapreducelib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/aos/projects/CMakeFiles --progress-num=1,2,3 "Built target mapreducelib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=1,2,3 "Built target mapreducelib"
 .PHONY : src/CMakeFiles/mapreducelib.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/mapreducelib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mapreducelib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : src/CMakeFiles/mapreducelib.dir/rule
 
 # Convenience name for target.
@@ -212,14 +212,14 @@ src/CMakeFiles/mapreducelib.dir/clean:
 src/CMakeFiles/p4protolib.dir/all:
 	$(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/depend
 	$(MAKE) -f src/CMakeFiles/p4protolib.dir/build.make src/CMakeFiles/p4protolib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/aos/projects/CMakeFiles --progress-num=11,12,13,14 "Built target p4protolib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=11,12,13,14 "Built target p4protolib"
 .PHONY : src/CMakeFiles/p4protolib.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/p4protolib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/p4protolib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : src/CMakeFiles/p4protolib.dir/rule
 
 # Convenience name for target.
@@ -240,14 +240,14 @@ test/CMakeFiles/mr_worker.dir/all: src/CMakeFiles/mr_workerlib.dir/all
 test/CMakeFiles/mr_worker.dir/all: src/CMakeFiles/p4protolib.dir/all
 	$(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/depend
 	$(MAKE) -f test/CMakeFiles/mr_worker.dir/build.make test/CMakeFiles/mr_worker.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/aos/projects/CMakeFiles --progress-num=4,5 "Built target mr_worker"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=4,5 "Built target mr_worker"
 .PHONY : test/CMakeFiles/mr_worker.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/mr_worker.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mr_worker.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : test/CMakeFiles/mr_worker.dir/rule
 
 # Convenience name for target.
@@ -268,14 +268,14 @@ test/CMakeFiles/mrdemo.dir/all: src/CMakeFiles/mapreducelib.dir/all
 test/CMakeFiles/mrdemo.dir/all: src/CMakeFiles/p4protolib.dir/all
 	$(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/depend
 	$(MAKE) -f test/CMakeFiles/mrdemo.dir/build.make test/CMakeFiles/mrdemo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/aos/projects/CMakeFiles --progress-num=9,10 "Built target mrdemo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=9,10 "Built target mrdemo"
 .PHONY : test/CMakeFiles/mrdemo.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/mrdemo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mrdemo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : test/CMakeFiles/mrdemo.dir/rule
 
 # Convenience name for target.

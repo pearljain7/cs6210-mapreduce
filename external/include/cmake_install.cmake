@@ -1,4 +1,4 @@
-# Install script for directory: /aos/projects/external/include
+# Install script for directory: /home/sarah/Documents/AOS/project4/cs6210-mapreduce/external/include
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

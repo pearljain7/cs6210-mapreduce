@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/aos/projects/src/mapreduce.cc" "/aos/projects/src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o"
-  "/aos/projects/src/mapreduce_impl.cc" "/aos/projects/src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o"
+  "/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce.cc" "/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o"
+  "/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce_impl.cc" "/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,11 +18,12 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "external/include"
   "src"
+  "/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/aos/projects/src/CMakeFiles/p4protolib.dir/DependInfo.cmake"
+  "/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/CMakeFiles/p4protolib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/mapreducelib.dir/depend.make
@@ -59,29 +59,29 @@ include src/CMakeFiles/mapreducelib.dir/flags.make
 
 src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o: src/CMakeFiles/mapreducelib.dir/flags.make
 src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o: src/mapreduce.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o"
-	cd /aos/projects/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mapreducelib.dir/mapreduce.cc.o -c /aos/projects/src/mapreduce.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mapreducelib.dir/mapreduce.cc.o -c /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce.cc
 
 src/CMakeFiles/mapreducelib.dir/mapreduce.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mapreducelib.dir/mapreduce.cc.i"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /aos/projects/src/mapreduce.cc > CMakeFiles/mapreducelib.dir/mapreduce.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce.cc > CMakeFiles/mapreducelib.dir/mapreduce.cc.i
 
 src/CMakeFiles/mapreducelib.dir/mapreduce.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mapreducelib.dir/mapreduce.cc.s"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /aos/projects/src/mapreduce.cc -o CMakeFiles/mapreducelib.dir/mapreduce.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce.cc -o CMakeFiles/mapreducelib.dir/mapreduce.cc.s
 
 src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o: src/CMakeFiles/mapreducelib.dir/flags.make
 src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o: src/mapreduce_impl.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o"
-	cd /aos/projects/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o -c /aos/projects/src/mapreduce_impl.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o -c /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce_impl.cc
 
 src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.i"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /aos/projects/src/mapreduce_impl.cc > CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce_impl.cc > CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.i
 
 src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /aos/projects/src/mapreduce_impl.cc -o CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mapreduce_impl.cc -o CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.s
 
 # Object files for target mapreducelib
 mapreducelib_OBJECTS = \
@@ -95,9 +95,9 @@ src/libmapreducelib.a: src/CMakeFiles/mapreducelib.dir/mapreduce.cc.o
 src/libmapreducelib.a: src/CMakeFiles/mapreducelib.dir/mapreduce_impl.cc.o
 src/libmapreducelib.a: src/CMakeFiles/mapreducelib.dir/build.make
 src/libmapreducelib.a: src/CMakeFiles/mapreducelib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libmapreducelib.a"
-	cd /aos/projects/src && $(CMAKE_COMMAND) -P CMakeFiles/mapreducelib.dir/cmake_clean_target.cmake
-	cd /aos/projects/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mapreducelib.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libmapreducelib.a"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && $(CMAKE_COMMAND) -P CMakeFiles/mapreducelib.dir/cmake_clean_target.cmake
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mapreducelib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/mapreducelib.dir/build: src/libmapreducelib.a
@@ -105,10 +105,10 @@ src/CMakeFiles/mapreducelib.dir/build: src/libmapreducelib.a
 .PHONY : src/CMakeFiles/mapreducelib.dir/build
 
 src/CMakeFiles/mapreducelib.dir/clean:
-	cd /aos/projects/src && $(CMAKE_COMMAND) -P CMakeFiles/mapreducelib.dir/cmake_clean.cmake
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && $(CMAKE_COMMAND) -P CMakeFiles/mapreducelib.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/mapreducelib.dir/clean
 
 src/CMakeFiles/mapreducelib.dir/depend:
-	cd /aos/projects && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /aos/projects /aos/projects/src /aos/projects /aos/projects/src /aos/projects/src/CMakeFiles/mapreducelib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sarah/Documents/AOS/project4/cs6210-mapreduce /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src /home/sarah/Documents/AOS/project4/cs6210-mapreduce /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/CMakeFiles/mapreducelib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/mapreducelib.dir/depend
 

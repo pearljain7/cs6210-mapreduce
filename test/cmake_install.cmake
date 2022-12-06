@@ -1,4 +1,4 @@
-# Install script for directory: /aos/projects/test
+# Install script for directory: /home/sarah/Documents/AOS/project4/cs6210-mapreduce/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +126,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /aos/projects && $(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles /aos/projects/external/include/CMakeFiles/progress.marks
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 external/include/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /aos/projects/CMakeFiles 0
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles /home/sarah/Documents/AOS/project4/cs6210-mapreduce/external/include/CMakeFiles/progress.marks
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 external/include/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 external/include/clean
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 external/include/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,17 +143,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 external/include/preinstall
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 external/include/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /aos/projects && $(MAKE) -f CMakeFiles/Makefile2 external/include/preinstall
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(MAKE) -f CMakeFiles/Makefile2 external/include/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /aos/projects && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -179,6 +179,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /aos/projects && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

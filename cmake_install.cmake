@@ -1,4 +1,4 @@
-# Install script for directory: /aos/projects
+# Install script for directory: /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/aos/projects/external/cmake_install.cmake")
-  include("/aos/projects/src/cmake_install.cmake")
-  include("/aos/projects/test/cmake_install.cmake")
+  include("/home/sarah/Documents/AOS/project4/cs6210-mapreduce/external/cmake_install.cmake")
+  include("/home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/cmake_install.cmake")
+  include("/home/sarah/Documents/AOS/project4/cs6210-mapreduce/test/cmake_install.cmake")
 
 endif()
 
@@ -53,5 +53,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/aos/projects/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/sarah/Documents/AOS/project4/cs6210-mapreduce/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

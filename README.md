@@ -1,7 +1,7 @@
 # cs6210Project4
 MapReduce Infrastructure
 
-## Project Instructions
+## Project Instructionss
 
 [Project Description](description.md)
 
@@ -9,3 +9,8 @@ MapReduce Infrastructure
 
 ### How to setup the project  
 Same as project 3 instructions
+
+
+## Implementation Details
+
+

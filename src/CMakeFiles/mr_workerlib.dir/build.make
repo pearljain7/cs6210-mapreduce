@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /aos/projects
+CMAKE_SOURCE_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /aos/projects
+CMAKE_BINARY_DIR = /home/sarah/Documents/AOS/project4/cs6210-mapreduce
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/mr_workerlib.dir/depend.make
@@ -59,29 +59,29 @@ include src/CMakeFiles/mr_workerlib.dir/flags.make
 
 src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o: src/CMakeFiles/mr_workerlib.dir/flags.make
 src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o: src/mr_task_factory.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o"
-	cd /aos/projects/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o -c /aos/projects/src/mr_task_factory.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o -c /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mr_task_factory.cc
 
 src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.i"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /aos/projects/src/mr_task_factory.cc > CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mr_task_factory.cc > CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.i
 
 src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.s"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /aos/projects/src/mr_task_factory.cc -o CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/mr_task_factory.cc -o CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.s
 
 src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o: src/CMakeFiles/mr_workerlib.dir/flags.make
 src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o: src/run_worker.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o"
-	cd /aos/projects/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mr_workerlib.dir/run_worker.cc.o -c /aos/projects/src/run_worker.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mr_workerlib.dir/run_worker.cc.o -c /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/run_worker.cc
 
 src/CMakeFiles/mr_workerlib.dir/run_worker.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mr_workerlib.dir/run_worker.cc.i"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /aos/projects/src/run_worker.cc > CMakeFiles/mr_workerlib.dir/run_worker.cc.i
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/run_worker.cc > CMakeFiles/mr_workerlib.dir/run_worker.cc.i
 
 src/CMakeFiles/mr_workerlib.dir/run_worker.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mr_workerlib.dir/run_worker.cc.s"
-	cd /aos/projects/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /aos/projects/src/run_worker.cc -o CMakeFiles/mr_workerlib.dir/run_worker.cc.s
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/run_worker.cc -o CMakeFiles/mr_workerlib.dir/run_worker.cc.s
 
 # Object files for target mr_workerlib
 mr_workerlib_OBJECTS = \
@@ -95,9 +95,9 @@ src/libmr_workerlib.a: src/CMakeFiles/mr_workerlib.dir/mr_task_factory.cc.o
 src/libmr_workerlib.a: src/CMakeFiles/mr_workerlib.dir/run_worker.cc.o
 src/libmr_workerlib.a: src/CMakeFiles/mr_workerlib.dir/build.make
 src/libmr_workerlib.a: src/CMakeFiles/mr_workerlib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/aos/projects/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libmr_workerlib.a"
-	cd /aos/projects/src && $(CMAKE_COMMAND) -P CMakeFiles/mr_workerlib.dir/cmake_clean_target.cmake
-	cd /aos/projects/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mr_workerlib.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sarah/Documents/AOS/project4/cs6210-mapreduce/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libmr_workerlib.a"
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && $(CMAKE_COMMAND) -P CMakeFiles/mr_workerlib.dir/cmake_clean_target.cmake
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mr_workerlib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/mr_workerlib.dir/build: src/libmr_workerlib.a
@@ -105,10 +105,10 @@ src/CMakeFiles/mr_workerlib.dir/build: src/libmr_workerlib.a
 .PHONY : src/CMakeFiles/mr_workerlib.dir/build
 
 src/CMakeFiles/mr_workerlib.dir/clean:
-	cd /aos/projects/src && $(CMAKE_COMMAND) -P CMakeFiles/mr_workerlib.dir/cmake_clean.cmake
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src && $(CMAKE_COMMAND) -P CMakeFiles/mr_workerlib.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/mr_workerlib.dir/clean
 
 src/CMakeFiles/mr_workerlib.dir/depend:
-	cd /aos/projects && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /aos/projects /aos/projects/src /aos/projects /aos/projects/src /aos/projects/src/CMakeFiles/mr_workerlib.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sarah/Documents/AOS/project4/cs6210-mapreduce && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sarah/Documents/AOS/project4/cs6210-mapreduce /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src /home/sarah/Documents/AOS/project4/cs6210-mapreduce /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src /home/sarah/Documents/AOS/project4/cs6210-mapreduce/src/CMakeFiles/mr_workerlib.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/mr_workerlib.dir/depend
 

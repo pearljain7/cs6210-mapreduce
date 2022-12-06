@@ -71,7 +71,7 @@ bool Worker::run() {
 	builder.AddListeningPort(ip_addr_port_, grpc::InsecureServerCredentials());
     builder.RegisterService(this);
     std::unique_ptr<grpc::Server> server = builder.BuildAndStart();
-    std::cout << "server started" << std::endl;
+    std::cout << "Server started" << std::endl;
     // Waits for the server to finish.
     // auto reducer = get_reducer_from_task_factory("cs6210");
 	// reducer->reduce("dummy", std::vector<std::string>({"1", "1"}));
@@ -127,7 +127,7 @@ grpc::Status Worker::RegisterReduceService(::grpc::ServerContext* context, const
 
     for (int file_id = 0; file_id < request->intermediate_file_address_size(); file_id++) {
         intermediate_input_files.emplace_back(request->intermediate_file_address(file_id));
-        std::cout << "Reducer: " << std::to_string(reducer_id) << "getting input file: " << intermediate_input_files.back() << std::endl;
+        std::cout << "Reducer: " << std::to_string(reducer_id) << " fetching input file: " << intermediate_input_files.back() << std::endl;
     }
 
     std::shared_ptr<BaseReducer> reducer = get_reducer_from_task_factory(user_id);

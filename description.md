@@ -94,7 +94,7 @@ submit to Gradescope.
 It will ask for your first name and last name and generate a file
 called `Firstname_Lastname_p4.zip`.  If working in pairs, you may use
 either student name for the deliverable, and include the names of both
-members iin the README file.
+members in the README file.
 
 The resulting zip file should have the following contents:
 
